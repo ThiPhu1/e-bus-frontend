@@ -1,0 +1,218 @@
+@import "breakpoints";
+@import "variables";
+
+@mixin xsm {
+    @media (min-width: #{$screen-xsm-min}) {
+        @content;
+    }
+}
+
+@mixin xsm-down {
+    @media (max-width: #{$screen-xsm-min}) {
+        @content;
+    }
+}
+
+@mixin msm-down {
+    @media (max-width: #{$screen-msm-min}) {
+        @content;
+    }
+}
+
+// Small devices
+@mixin sm {
+    @media (min-width: #{$screen-sm-min}) {
+        @content;
+    }
+}
+
+@mixin sm-down {
+    @media (max-width: #{$screen-sm-min}) {
+        @content;
+    }
+}
+
+// Sub medium devices
+@mixin smd {
+    @media (min-width: #{$screen-smd-min}) {
+        @content;
+    }
+}
+
+@mixin smd-down {
+    @media (max-width: #{$screen-smd-min}) {
+        @content;
+    }
+}
+
+// Medium devices
+@mixin md {
+    @media (min-width: #{$screen-md-min}) {
+        @content;
+    }
+}
+
+@mixin md-down {
+    @media (max-width: #{$screen-md-min}) {
+        @content;
+    }
+}
+
+// Large devices
+@mixin lg {
+    @media (min-width: #{$screen-lg-min}) {
+        @content;
+    }
+}
+
+@mixin lg-down {
+    @media (max-width: #{$screen-lg-min }) {
+        @content;
+    }
+}
+
+// Extra large devices
+@mixin xl {
+    @media (min-width: #{$screen-xl-min}) {
+        @content;
+    }
+}
+
+@mixin xl-down {
+    @media (max-width: #{$screen-xl-min}) {
+        @content;
+    }
+}
+
+@mixin xxl {
+    @media (min-width: #{$screen-xxl-min}) {
+        @content;
+    }
+}
+
+@mixin xxl-down {
+    @media (max-width: #{$screen-xxl-min}) {
+        @content;
+    }
+}
+
+@mixin xxxl {
+    @media (min-width: #{$screen-xxxl-min}) {
+        @content;
+    }
+}
+
+@mixin xxxl-down {
+    @media (max-width: #{$screen-xxxl-min}) {
+        @content;
+    }
+}
+
+@mixin fhd-desktop-up {
+    @media (min-width: #{$screen-fhd-min}) {
+        @content;
+    }
+}
+
+@mixin text-base {
+    font-size: $font-base;
+    font-weight: 300;
+    line-height: 1.25;
+    letter-spacing: 0.025em;
+}
+
+@mixin text-base-title {
+    font-size: $font-base;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 0.025em;
+}
+
+@mixin text-small {
+    font-size: $font-sm;
+    font-weight: 300;
+    line-height: calc(20 / 14);
+    letter-spacing: 0;
+}
+
+@mixin text-small-title {
+    font-size: $font-sm;
+    font-weight: 400;
+    line-height: calc(20 / 14);
+    letter-spacing: 0;
+}
+
+@mixin text-headline-1 {
+    font-size: $font-headline-1;
+    line-height: 60px;
+    font-weight: 600;
+}
+
+@mixin text-headline-3 {
+    font-size: $font-headline-4;
+    line-height: 49.3px;
+    font-weight: 600;
+}
+
+@mixin text-headline-4 {
+    font-size: $font-headline-4;
+    line-height: 20px;
+    font-weight: 600;
+}
+
+@mixin text-detail-sm {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+@mixin text-detail-md {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+@mixin text-color-base {
+    color: $color-text-base;
+}
+
+@mixin text-color-secondary {
+    color: $color-secondary;
+}
+
+@mixin text-dark {
+    color: $color-black;
+}
+
+@mixin text-light-gray {
+    color: $color-light-gray;
+}
+
+@mixin text-gradient-gold {
+    background: linear-gradient(180deg, #ffd76f 0%, #ffefc6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+@mixin bg-secondary-20 {
+    background: linear-gradient(0deg, rgba(88, 80, 63, 0.2), rgba(88, 80, 63, 0.2)), #000000;
+}
+
+@mixin ratio($width, $height) {
+    aspect-ratio: $width / $height;
+
+    // Fallback (current, using padding hack)
+    @supports not (aspect-ratio: $width / $height) { 
+        &::before {
+            float: left;
+            padding-top: $height / $width * 100%;
+            content: '';
+        }
+        
+        &::after {
+            display: block;
+            content: '';
+            clear: both;
+        }
+    }
+}

@@ -1,7 +1,14 @@
-import '../styles/globals.css'
+import "../styles/global.scss";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function Layout({ Component, pageProps }) {
+  const getLayout = Component.getLayout || (({ page }) => page)
+
+  return (
+    <>
+      {getLayout(<Component {...pageProps} />)}
+    </>
+  );
 }
 
-export default MyApp
+Layout.propTypes = {};
+export default Layout;

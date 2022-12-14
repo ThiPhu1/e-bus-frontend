@@ -1,0 +1,69 @@
+@import "./_mixin";
+@import './_variables';
+
+html {
+  background-color: $body-bg;
+  scroll-behavior: auto;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input {
+  outline: none;
+
+  &::-webkit-input-placeholder {
+    color: $color-secondary;
+  }
+
+  &::-moz-placeholder {
+    color: $color-secondary;
+  }
+
+  &:-ms-input-placeholder {
+    color: $color-secondary;
+  }
+
+  &:-moz-placeholder {
+    color: $color-secondary;
+  }
+
+
+}
+
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: transparent;
+  /* Not removed via appearance */
+  margin: 0;
+}
+
+
+
+select {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  line-height: inherit;
+  outline: none;
+}
