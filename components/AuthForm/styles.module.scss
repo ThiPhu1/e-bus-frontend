@@ -1,0 +1,28 @@
+@import "_mixins";
+
+.auth-form-wrapper {
+    width: 100%;
+    max-width: 460px;
+
+    margin: 0 auto;
+    padding: 32px 16px 0;
+
+    @include sm-down{
+        padding: 16px 16px 0;
+    }
+
+    .auth-form {
+        &__heading {
+            @include text-headline-1;
+        }
+    }
+
+    .form-addition{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .submit_btn{
+        padding-top: 1rem;
+    }
+}

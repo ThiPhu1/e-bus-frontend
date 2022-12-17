@@ -1,0 +1,28 @@
+@import './_variables';
+@import './_mixins';
+
+.navbar-wrapper {
+    width: 100%;
+
+    .navbar {
+        width: 100%;
+        height: $nav-bar-h;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 0 64px;
+
+        &__left {
+            position: relative;
+        }
+
+        &__right {
+            &-container {
+                display: flex;
+                gap: 16px;
+            }
+        }
+    }
+}
