@@ -27,12 +27,16 @@ export default function NavBar() {
                         <Link
                             href="/sign-in"
                         >
-                            <Button type="text" size="large">Đăng nhập</Button>
+                            <a href="/sign-in">
+                                <Button type="text" size="large">Đăng nhập</Button>
+                            </a>
                         </Link>
                         <Link
                             href="/sign-up"
                         >
-                            <Button type="primary" size="large">Đăng kí</Button>
+                            <a href="/sign-up">
+                                <Button type="primary" size="large">Đăng kí</Button>
+                            </a>
                         </Link>
                     </div>
                 </div>

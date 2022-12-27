@@ -1,6 +1,6 @@
 
 export const authFormFields = {
-    signIn: [
+    signUp: [
         {
             name: "fullName",
             label: "Họ và Tên",
@@ -49,7 +49,7 @@ export const authFormFields = {
             inputType: "password",
         },
     ],
-    signUp: [
+    signIn: [
         {
             name: "phoneNum",
             label: "Số điện thoại",

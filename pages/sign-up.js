@@ -5,7 +5,7 @@ import { authFormFields } from "utils/constant/authFormFields";
 
 export default function SignUpPage() {
 
-    const onSigInSuccessHandle = (values) => {
+    const onSignUpSuccessHandle = (values) => {
         console.log("submitted", values);
     }
 
@@ -15,8 +15,8 @@ export default function SignUpPage() {
             <AuthForm
                 formType="sign-up"
                 formName="Đăng kí"
-                fields={authFormFields?.signIn}
-                onSubmitHandle={onSigInSuccessHandle}
+                fields={authFormFields?.signUp}
+                onSubmitHandle={onSignUpSuccessHandle}
                 submitText="Tạo Tài Khoản"
             />
         </div>

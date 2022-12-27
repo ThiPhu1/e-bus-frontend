@@ -2,13 +2,17 @@ import "../styles/global.scss";
 
 import AntdStylesConfig from "components/AntdStylesConfig";
 
+import AuthProvider from "contexts/auth";
+
 function Layout({ Component, pageProps }) {
   const getLayout = Component.getLayout || (({ page }) => page)
 
   return (
-    <AntdStylesConfig>
+    <AuthProvider>
+      <AntdStylesConfig>
         {getLayout(<Component {...pageProps} />)}
-    </AntdStylesConfig>
+      </AntdStylesConfig>
+    </AuthProvider>
   );
 }
 

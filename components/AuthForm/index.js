@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react";
 
 import styles from "./styles.module.scss";
 
-export default function AuthForm({ formType, formName, fields, onSubmitHandle, submitText }) {
+export default function AuthForm({ formType, formName, fields, onSubmitHandle, submitText, isSubmitting }) {
 
     const renderInputType = useCallback((inputType) => {
         switch (inputType) {
@@ -42,6 +42,7 @@ export default function AuthForm({ formType, formName, fields, onSubmitHandle, s
                     name={formName}
                     layout="vertical"
                     onFinish={onSubmitHandle}
+                    disabled={isSubmitting}
                 >
                     <>
                         {
