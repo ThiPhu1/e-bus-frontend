@@ -2,14 +2,21 @@
 export const authFormFields = {
     signUp: [
         {
-            name: "fullName",
+            name: "username",
+            label: "Tên người dùng",
+            rules: [
+                { required: true, message: `Vui lòng cung cấp tên người dùng` },
+            ],
+        },
+        {
+            name: "fullname",
             label: "Họ và Tên",
             rules: [
                 { required: true, message: `Vui lòng cung cấp họ và tên` },
             ],
         },
         {
-            name: "phoneNum",
+            name: "phoneNumber",
             label: "Số điện thoại",
             rules: [
                 { required: true, message: `Vui lòng cung cấp số điện thoại` },
@@ -51,7 +58,7 @@ export const authFormFields = {
     ],
     signIn: [
         {
-            name: "phoneNum",
+            name: "phoneNumber",
             label: "Số điện thoại",
             rules: [
                 { required: true, message: `Vui lòng cung cấp số điện thoại` },
@@ -68,7 +75,7 @@ export const authFormFields = {
     ],
     resetPassword: [
         {
-            name: "phoneNum",
+            name: "phoneNumber",
             label: "Số điện thoại đăng kí",
             rules: [
                 { required: true, message: `Vui lòng cung cấp số điện thoại` },
