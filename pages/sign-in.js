@@ -11,6 +11,8 @@ import { setCookies } from "utils/cookies";
 
 import { useAuthContext } from "contexts/auth";
 
+import { signIn } from "next-auth/react";
+
 import { useRouter } from "next/router";
 
 export default function SignInPage() {
@@ -24,22 +26,20 @@ export default function SignInPage() {
     const onSignInHandle = async (values) => {
         setSubmitState(true);
 
-        const signInBody = {
+        const res = await signIn("credentials", {
             username: values?.phoneNum,
             password: values?.password,
-        }
+            redirect: false,
+        })
 
-        const res = await authServices.signIn({ body: signInBody })
-        const { status, data, response } = res;
-        if (status === 200) {
-            setCookies("accessToken", data?.accessToken);
-            setUser(data?.user);
-
+        console.log("res",res);
+        
+        if (res.status === 200) {
             router.push("/");
         } else {
             api.error({
                 message: "Error",
-                description: response?.data?.message,
+                description: res.error,
             });
         }
 
