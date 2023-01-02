@@ -8,6 +8,7 @@ const AuthProvider = (props) => {
     const session = useSession();
     const [user, setUser] = useState();
     const [apiToken, setApiToken] = useState({ accessToken: "", refreshToken: "" });
+    const [initialCheck,setInitCheck] = useState(false);
 
     useEffect(() => {
         console.log("session", session);
@@ -16,10 +17,15 @@ const AuthProvider = (props) => {
     useEffect(() => {
         const { status } = session;
 
+        // set init check
+
         if (status === "loading") {
+            setInitCheck(false);
             return;
         }
-
+        
+        setInitCheck(true);
+        
         if (status === "authenticated") {
             const { data: { user } } = session;
             if (user) {
@@ -33,9 +39,14 @@ const AuthProvider = (props) => {
         setApiToken(null);
     }, [session])
 
+    useEffect(()=>{
+        console.log("initcheck",initialCheck);
+    },[initialCheck])
+
     return (
         <AuthContext.Provider
             value={{
+                initialCheck,
                 user,
                 apiToken,
             }}

@@ -24,7 +24,7 @@ export default function AuthForm({ formType, formName, fields, onSubmitHandle, s
                 </Link>
             case "sign-up":
                 return <span>
-                    Đã có tài khoản ? <Link href="/sign-in">
+                    Đã có tài khoản? <Link href="/sign-in">
                         <a href="/sign-in">
                             Đăng nhập
                         </a>
@@ -67,7 +67,7 @@ export default function AuthForm({ formType, formName, fields, onSubmitHandle, s
                     </div>
                     <Form.Item>
                         <div className={styles["submit_btn"]}>
-                            <Button type="primary" htmlType="submit" size="large" block>
+                            <Button type="primary" htmlType="submit" size="large" block loading={isSubmitting}>
                                 {submitText}
                             </Button>
                         </div>
