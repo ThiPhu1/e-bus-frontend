@@ -1,14 +1,14 @@
 import MainLayout from "layouts/Main";
-
-import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
+import { useAuthContext } from "contexts/auth";
+
 export default function HomePage() {
-  const { data } = useSession();
-  console.log(useSession());
-//   useEffect(() => {
-// console.log("data",JSON.stringify(data.user, null, 2));
-//   }, [])
+  const { user, apiToken } = useAuthContext();
+
+  useEffect(()=>{
+    console.log(user, apiToken);
+  },[user,apiToken])
 
   return (
     <h1>hello world</h1>
@@ -20,5 +20,3 @@ HomePage.getLayout = function getLayout(page) {
     <MainLayout>{page}</MainLayout>
   );
 }
-
-

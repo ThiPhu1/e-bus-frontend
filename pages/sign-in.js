@@ -21,11 +21,11 @@ export default function SignInPage() {
         setSubmitState(true);
 
         const res = await signIn("credentials", {
-            username: values?.phoneNum,
+            username: values?.phoneNumber,
             password: values?.password,
             redirect: false,
         })
-
+        
         console.log("res",res);
 
         if (res.status === 200) {

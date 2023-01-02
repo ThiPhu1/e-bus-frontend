@@ -13,7 +13,7 @@ const authOptions = {
             credential: {},
             async authorize(credential, req) {
                 const { username, password } = credential;
-
+                console.log("credential",credential);
                 const signInBody = {
                     username,
                     password
@@ -21,6 +21,7 @@ const authOptions = {
 
                 const res = await authServices.signIn({ body: signInBody })
                 const { status, data, response } = res;
+                console.log("sign in res",res);
                 if (status === 200) {
                     return data;
                 } else {
@@ -38,6 +39,7 @@ const authOptions = {
             return token
         },
         session: async ({ session, token }) => {
+            console.log("token",token.user);
             session.user = token.user
             return session
         }
