@@ -6,19 +6,19 @@ const axiosClient = axios.create({
     baseURL: host,
 });
 
-export function baseGet({ endpoint, header }) {
-    return axiosClient.get(endpoint, header)
+export function baseGet({ endpoint, headers }) {
+    return axiosClient.get(endpoint, { headers })
 }
 
-export function basePost({ endpoint, header, body }) {
-    return axiosClient.post(endpoint, body, header)
+export function basePost({ endpoint, headers, body }) {
+    return axiosClient.post(endpoint, body, { headers })
 }
 
-export function basePatch({ endpoint, header, body }) {
-    return axiosClient.patch(endpoint, header, body)
+export function basePatch({ endpoint, headers, body }) {
+    return axiosClient.patch(endpoint, {headers}, body)
 }
 
-export function baseDelete({ endpoint, header }) {
-    return axiosClient.delete(endpoint, header)
+export function baseDelete({ endpoint, headers }) {
+    return axiosClient.delete(endpoint, {headers})
 }
 

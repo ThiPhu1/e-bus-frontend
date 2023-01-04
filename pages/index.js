@@ -1,21 +1,13 @@
 import MainLayout from "layouts/Main";
 import { useEffect } from "react";
+import HomePage from "components/Home";
 
-import { useAuthContext } from "contexts/auth";
+export default function Home() {
 
-export default function HomePage() {
-  const { user, apiToken } = useAuthContext();
-
-  useEffect(()=>{
-    console.log(user, apiToken);
-  },[user,apiToken])
-
-  return (
-    <h1>hello world</h1>
-  )
+  return <HomePage />
 }
 
-HomePage.getLayout = function getLayout(page) {
+Home.getLayout = function getLayout(page) {
   return (
     <MainLayout>{page}</MainLayout>
   );

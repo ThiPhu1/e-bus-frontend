@@ -1,4 +1,4 @@
-import { basePost } from "api/base";
+import { basePost, baseGet } from "api/base";
 import apiEndPointList from "utils/constant/apiEndPointsList";
 
 const authServices = {
@@ -16,7 +16,7 @@ const authServices = {
         return response;
     },
     signUp: async ({ body }) => {
-        console.log("body",body);
+        console.log("body", body);
         let response = null;
         try {
             response = await basePost({
@@ -29,6 +29,21 @@ const authServices = {
 
         return response;
     },
+    refreshAccessToken: async (refreshToken) => {
+        let response = null;
+        try {
+            response = await baseGet({
+                endpoint: apiEndPointList.auth.REFRESH_ACCESS_TOKEN,
+                headers: {
+                    refresh_token: refreshToken,
+                }
+            });
+        } catch (err) {
+            response = err;
+        }
+
+        return response;
+    }
 }
 
 export default authServices;
