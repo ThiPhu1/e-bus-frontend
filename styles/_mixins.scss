@@ -148,6 +148,12 @@
     font-weight: 600;
 }
 
+@mixin text-headline-2 {
+    font-size: $font-headline-2;
+    line-height: 40px;
+    font-weight: 600;
+}
+
 @mixin text-headline-3 {
     font-size: $font-headline-4;
     line-height: 49.3px;

@@ -16,9 +16,9 @@ export default function Navbar() {
             <div className={styles["navbar"]}>
                 <div className={styles["navbar__left"]}>
                     <Link
-                        href="/"
+                        href="/route"
                     >
-                        <a href="/">
+                        <a href="/route">
                             <Image
                                 src="/common/main_logo.png"
                                 height={73}

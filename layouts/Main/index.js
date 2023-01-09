@@ -1,10 +1,16 @@
 import Navbar from "components/Navbar";
 
+import styles from "./styles.module.scss";
+
 export default function MainLayout({ children }) {
     return (
-        <div className={"container"}>
+        <div className={"container-fluid"}>
             <Navbar />
-            {children}
+            <div className={styles["main-wrapper"]}>
+                <main>
+                    {children}
+                </main>
+            </div>
         </div>
     );
 }

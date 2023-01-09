@@ -2,7 +2,14 @@
 @import './_mixins';
 
 .navbar-wrapper {
+    position: sticky;
+    top: 0;
+    left: 0;
+
     width: 100%;
+    background-color: $body-bg;
+    
+    z-index: 999;
 
     .navbar {
         width: 100%;
@@ -14,7 +21,7 @@
 
         padding: 0 64px;
 
-        @include lg-down{
+        @include lg-down {
             padding: 0 16px;
         }
 

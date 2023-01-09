@@ -16,4 +16,4 @@ export default withAuth(
 );
 
 // include protected route
-export const config = {matcher: ["/"]};
+export const config = {matcher: []};
