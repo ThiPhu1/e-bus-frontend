@@ -1,6 +1,6 @@
 @import "_mixins.scss";
 
-.route-card{
+.route-card {
     display: flex;
     justify-content: space-between;
 
@@ -8,8 +8,50 @@
         width: 100%;
         max-width: 50%;
 
-        .route-title{
-            @include text-headline-3;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .route-name {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .route-title {
+                @include text-headline-3;
+            }
+
+            .route-subtitle {
+                color: $text-secondary;
+            }
+        }
+
+        .route-duration {
+            display: flex;
+            justify-content: space-between;
+
+            max-width: 50%;
+
+            .route-time {
+                @include text-headline-4;
+                font-weight: 600;
+
+                // &::after{
+                //     padding-left: 4px;
+                // }
+
+                // &--start {
+                //     &:after{
+                //         content: "Sáng";
+                //     }
+                // }
+
+                // &--end {
+                //     &:after{
+                //         content: "Chiều";
+                //     }
+                // }
+            }
         }
     }
 
@@ -21,15 +63,22 @@
 
         display: flex;
         flex-direction: column;
+        gap: 16px;
 
-        .route-price{
+        .route-price {
             display: flex;
+            align-items: flex-end;
             flex-direction: column;
+
+            .price {
+                @include text-headline-4;
+                font-size: 600;
+            }
         }
 
     }
 
-    &-divider{
+    &-divider {
         display: block;
         width: 1px;
 

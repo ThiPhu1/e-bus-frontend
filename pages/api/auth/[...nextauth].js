@@ -18,9 +18,9 @@ const refreshAccessToken = async (refreshToken) => {
     return null;
 }
 
-const setExpirTime = (tokenExpire) => {
-    return Date.now() + (parseInt(tokenExpire.slice(0,-1)) * 60 * 1000);
-}
+// const setExpirTime = (tokenExpire) => {
+//     return Date.now() + (parseInt(tokenExpire.slice(0,-1)) * 60 * 1000);
+// }
 
 const authOptions = {
     session: {
@@ -57,7 +57,7 @@ const authOptions = {
             if (user) {
                 token.user = user.user;
                 token.accessToken = user.accessToken;
-                token.accessExpir = setExpirTime(user.tokenExpire);
+                token.accessExpir = user.tokenExpire
                 token.refreshToken = user.refreshToken;
             }
 
@@ -73,7 +73,7 @@ const authOptions = {
                 token.error = newToken?.error;
             } else {
                 token.accessToken = newToken?.accessToken;
-                token.accessExpir = setExpirTime(newToken.tokenExpire);
+                token.accessExpir = newToken.tokenExpire;
             }
 
             return token;
