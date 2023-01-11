@@ -2,81 +2,156 @@
 
 .route-card {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 
-    &__left {
-        width: 100%;
-        max-width: 50%;
-
+    &__top {
         display: flex;
-        flex-direction: column;
         justify-content: space-between;
 
-        .route-name {
+        &-left {
+            width: 100%;
+            // max-width: 60%;
+
             display: flex;
+            gap: 24px;
             flex-direction: column;
-            gap: 8px;
-
-            .route-title {
-                @include text-headline-3;
-            }
-
-            .route-subtitle {
-                color: $text-secondary;
-            }
-        }
-
-        .route-duration {
-            display: flex;
             justify-content: space-between;
 
-            max-width: 50%;
+            .route-name {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
 
-            .route-time {
-                @include text-headline-4;
-                font-weight: 600;
+                .route-title {
+                    @include text-headline-3;
+                }
 
-                // &::after{
-                //     padding-left: 4px;
-                // }
+                .route-subtitle {
+                    color: $text-secondary;
+                }
+            }
 
-                // &--start {
-                //     &:after{
-                //         content: "Sáng";
-                //     }
-                // }
+            .route-duration {
+                display: flex;
+                justify-content: space-between;
 
-                // &--end {
-                //     &:after{
-                //         content: "Chiều";
-                //     }
-                // }
+                max-width: 50%;
+
+                .route-time {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    @include text-headline-4;
+                    font-weight: 600;
+
+                    &::after {
+                        position: absolute;
+                        top: 100%;
+                        left: 50%;
+
+                        transform: translateX(-50%);
+
+                        padding: 2px 4px;
+                        font-size: 10px;
+                        color: #c0c0c0;
+
+                        white-space: nowrap;
+                        // background-color: rgb(180, 180, 180);
+
+                        border-radius: 10px;
+                    }
+
+                    &--start {
+                        &:after {
+                            content: "Bắt đầu";
+                        }
+                    }
+
+                    &--end {
+                        &:after {
+                            content: "Kết thúc";
+                        }
+                    }
+                }
+
+                .route-time-offset{
+                    display: flex;
+                    align-items: center;
+
+                    width: 100%;
+
+                    .arrow{
+                        position: relative;
+                        margin: 0 8px;
+                        width: 100%;
+                        height: 1px;
+                        background-color: #000000;
+
+                        &::after{
+                            position: absolute;
+                            top: 100%;
+                            left: 50%;
+
+                            transform: translateX(-50%);
+
+                            content: attr(spacing);
+                            display: block;
+                            font-size: 10px;
+                            color: #c0c0c0;
+                        }
+                    }
+                }
             }
         }
-    }
 
-    &__right {
-        align-items: flex-end;
-
-        width: 100%;
-        max-width: 20%;
-
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-
-        .route-price {
-            display: flex;
+        &-right {
             align-items: flex-end;
-            flex-direction: column;
 
-            .price {
-                @include text-headline-4;
-                font-size: 600;
+            width: 100%;
+            max-width: 20%;
+
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            .route-price {
+                display: flex;
+                align-items: flex-end;
+                flex-direction: column;
+
+                .price {
+                    @include text-headline-4;
+                    font-size: 600;
+                }
+            }
+
+        }
+    }
+
+    &__bottom {
+        margin-top: 24px;
+
+        .route-detail-btn {
+            padding: 2px 16px;
+            background-color: rgb(154, 197, 249);
+            border-radius: 24px;
+            outline: none;
+            border: none;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.25s ease-in-out;
+
+            &:hover {
+                background-color: rgba(154, 197, 249, 0.5);
             }
         }
-
     }
+
 
     &-divider {
         display: block;
@@ -84,4 +159,14 @@
 
         background-color: rgba($color: #000000, $alpha: 0.2);
     }
+}
+
+.route-detail {
+    &--active {
+        margin-top: 24px;
+        height: auto;
+    }
+
+    height: 0;
+    overflow: hidden;
 }

@@ -11,7 +11,7 @@ export default function RoutePage({ routes }) {
 
     return (
         <div className={`${styles["home-container"]} container`}>
-            <FilterSection />
+            {/* <FilterSection /> */}
             <div className={styles["main-section"]}>
                 <SearchBar />
                 <div className={styles["route-list-wrapper"]}>

@@ -1,52 +1,78 @@
 import { Card, Button } from "antd";
+import { DownOutlined } from '@ant-design/icons';
 import styles from "./styles.module.scss";
 
-import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+
+import CardDetail from "./CardDetail";
 
 export default function RouteCard({ route }) {
+    const router = useRouter();
+    const [detailExpand, setDetailExpand] = useState(false);
+
+    const onRouteDetailBtnClick = (e) => {
+        setDetailExpand((prev) => !prev);
+    }
+
+    const onBookBtnClick = () => {
+        router.push(`/route/${route?._id}`);
+    }
 
     return (
-        <Link
-            href={`/route/${route?._id}`}
-        >
-            <a href={`/route/${route?._id}`}>
-                <Card>
-                    <div className={styles["route-card"]}>
-                        <div className={styles["route-card__left"]}>
-                            <div className={styles["route-name"]}>
-                                {
-                                    route?.route_number
-                                        ? <>
-                                            <h3 className={styles["route-title"]}>
-                                                {`Tuyến số ${route?.route_number}`}
-                                            </h3>
-                                            <span className={styles["route-subtitle"]}>{route?.route_name}</span>
-                                        </>
-                                        : <h3 className={styles["route-title"]}>
-                                            {route?.route_name}
+        <Card>
+            <div className={styles["route-card"]}>
+                <div className={styles["route-card__top"]}>
+                    <div className={styles["route-card__top-left"]}>
+                        <div className={styles["route-name"]}>
+                            {
+                                route?.route_number
+                                    ? <>
+                                        <h3 className={styles["route-title"]}>
+                                            {`Tuyến số ${route?.route_number}`}
                                         </h3>
-                                }
-                            </div>
-                            <div className={styles["route-duration"]}>
-                                <span className={`${styles["route-time"]} ${styles["route-time--start"]}`}>
-                                    <span>{route?.time_start?.hours}</span>:<span>{route?.time_start?.minutes}</span>
-                                </span>
-                                <span className={`${styles["route-time"]} ${styles["route-time--end"]}`}>
-                                    <span>{route?.time_end?.hours}</span>:<span>{route?.time_end?.minutes}</span>
-                                </span>
-                            </div>
+                                        <span className={styles["route-subtitle"]}>{route?.route_name}</span>
+                                    </>
+                                    : <h3 className={styles["route-title"]}>
+                                        {route?.route_name}
+                                    </h3>
+                            }
                         </div>
-                        <div className={styles["route-card-divider"]}></div>
-                        <div className={styles["route-card__right"]}>
-                            <div className={styles["route-price"]}>
-                                <span>Giá vé từ</span>
-                                <span className={styles["price"]}>{route?.route_price} VND</span>
-                            </div>
-                            <Button type="primary" size="large" block>Đặt vé</Button>
+                        <div className={styles["route-duration"]}>
+                            <span className={`${styles["route-time"]} ${styles["route-time--start"]}`}>
+                                <span><span>{route?.time_start?.hours}</span>:<span>{route?.time_start?.minutes}</span></span>
+                            </span>
+                            <span className={styles["route-time-offset"]}>
+                                <span className={styles["arrow"]} spacing={`${route?.route_spacing} phút/chuyến`}/>
+                            </span>
+                            <span className={`${styles["route-time"]} ${styles["route-time--end"]}`}>
+                                <span><span>{route?.time_end?.hours}</span>:<span>{route?.time_end?.minutes}</span></span>
+                            </span>
                         </div>
                     </div>
-                </Card>
-            </a>
-        </Link>
+                    {/* <div className={styles["route-card-divider"]}></div> */}
+                    <div className={styles["route-card__top-right"]}>
+                        <div className={styles["route-price"]}>
+                            <span>Giá vé từ</span>
+                            <span className={styles["price"]}>{route?.route_price} VND</span>
+                        </div>
+                        <Button type="primary" size="large" block onClick={onBookBtnClick}>Đặt vé</Button>
+                    </div>
+                </div>
+                <div className={styles["route-card__bottom"]}>
+                    <button
+                        className={styles["route-detail-btn"]}
+                        onClick={onRouteDetailBtnClick}
+                    >
+                        {`${route?.stations?.length} Trạm`}
+                        <DownOutlined
+                            style={{ fontSize: '12px', paddingLeft: '4px' }}
+                            rotate={detailExpand ? 180 : 0}
+                        />
+                    </button>
+                    <CardDetail isActive={detailExpand} route={route} />
+                </div>
+            </div>
+        </Card>
     );
 }
