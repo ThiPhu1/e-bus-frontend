@@ -7,16 +7,12 @@ export default function DefaultSecondaryNav() {
             <Link
                 href="/sign-in"
             >
-                <a href="/sign-in">
-                    <Button type="text" size="large">Đăng nhập</Button>
-                </a>
+                <Button type="text" size="large">Đăng nhập</Button>
             </Link>
             <Link
                 href="/sign-up"
             >
-                <a href="/sign-up">
-                    <Button type="primary" size="large">Đăng kí</Button>
-                </a>
+                <Button type="primary" size="large">Đăng kí</Button>
             </Link>
         </>
     );

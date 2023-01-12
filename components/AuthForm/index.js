@@ -18,16 +18,12 @@ export default function AuthForm({ formType, formName, fields, onSubmitHandle, s
         switch (formType) {
             case "sign-in":
                 return <Link href="/forgot-password">
-                    <a href="/forgot-password">
-                        Quên mật khẩu
-                    </a>
+                    Quên mật khẩu
                 </Link>
             case "sign-up":
                 return <span>
                     Đã có tài khoản? <Link href="/sign-in">
-                        <a href="/sign-in">
-                            Đăng nhập
-                        </a>
+                        Đăng nhập
                     </Link>
                 </span>
             default: break;

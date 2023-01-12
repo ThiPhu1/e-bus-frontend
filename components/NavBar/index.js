@@ -18,23 +18,21 @@ export default function Navbar() {
                     <Link
                         href="/route"
                     >
-                        <a href="/route">
-                            <Image
-                                src="/common/main_logo.png"
-                                height={73}
-                                width={150}
-                            />
-                        </a>
+                        <Image
+                            src="/common/main_logo.png"
+                            height={73}
+                            width={150}
+                        />
                     </Link>
                 </div>
                 <div className={styles["navbar__right"]}>
                     <div className={styles["navbar__right-container"]}>
                         {
                             !initialCheck
-                            ? <></>
-                            : user
-                                ? <SignedInSecondaryNav user={user}/>
-                                : <DefaultSecondaryNav />
+                                ? <></>
+                                : user
+                                    ? <SignedInSecondaryNav user={user} />
+                                    : <DefaultSecondaryNav />
                         }
                     </div>
                 </div>
