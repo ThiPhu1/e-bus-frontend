@@ -29,7 +29,7 @@ export default function SignInPage() {
         console.log("res",res);
 
         if (res.status === 200) {
-            router.push("/");
+            router.push("/route");
         } else {
             api.error({
                 message: "Error",

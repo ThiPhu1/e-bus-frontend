@@ -17,12 +17,15 @@ export default function Navbar() {
                 <div className={styles["navbar__left"]}>
                     <Link
                         href="/route"
+                        passHref
                     >
-                        <Image
-                            src="/common/main_logo.png"
-                            height={73}
-                            width={150}
-                        />
+                        <a >
+                            <Image
+                                src="/common/main_logo.png"
+                                height={73}
+                                width={150}
+                            />
+                        </a>
                     </Link>
                 </div>
                 <div className={styles["navbar__right"]}>
