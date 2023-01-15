@@ -21,8 +21,6 @@ Route.getLayout = function getLayout(page) {
 export async function getServerSideProps(ctx) {
   const res = await routeService.getMany();
 
-  console.log("res",res);
-
   return {
     props: {
       routes: res?.routes ?? [],

@@ -16,7 +16,7 @@ export default function RouteCard({ route }) {
     }
 
     const onBookBtnClick = () => {
-        router.push(`/route/${route?._id}`);
+        router.push(`/checkout/${route?._id}`);
     }
 
     return (

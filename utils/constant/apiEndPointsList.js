@@ -6,7 +6,8 @@ const apiEndPointList = {
     },
     route: {
         GET_ALL : "/api/route",
-    }
+        GET: (id) => `/api/route/${id}`,
+    },
 }
 
 export default apiEndPointList;
