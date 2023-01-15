@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import DefaultSecondaryNav from "./layout/default";
-import SignedInSecondaryNav from "./layout/signedIn";
+import DefaultSecondaryNav from "./Default";
+import SignedInSecondaryNav from "./SignedIn";
 
 import { useAuthContext } from "contexts/auth";
 
