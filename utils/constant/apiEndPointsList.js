@@ -8,6 +8,10 @@ const apiEndPointList = {
         GET_ALL : "/api/route",
         GET: (id) => `/api/route/${id}`,
     },
+    ticket: {
+        GET_ALL : "/api/ticket",
+        GET: (id) => `/api/ticket/${id}`,
+    }
 }
 
 export default apiEndPointList;

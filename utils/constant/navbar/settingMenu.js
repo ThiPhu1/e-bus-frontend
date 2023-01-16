@@ -1,10 +1,14 @@
+import { UserOutlined, ShoppingOutlined } from '@ant-design/icons';
+
 export const settingMenu = [
     {
         title: "Tài khoản của tôi",
-        pathName: "/account",
+        pathName: "/profile/about",
+        icon: <UserOutlined />,
     },
     {
         title: "Lịch sử mua vé",
-        pathName: "/account/book-history",
+        pathName: "/profile/my-booking",
+        icon: <ShoppingOutlined />,
     },
 ];

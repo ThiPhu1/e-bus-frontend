@@ -9,7 +9,7 @@
 
     .nav-setting {
         &__item {
-            margin: 8px 0;
+            padding: 8px 0;
 
             a {
                 display: block;
@@ -29,8 +29,7 @@
 
     .sign-out-btn{
         display: block;
-        margin: 8px 0;
-        padding: 8px 16px;
+        padding: 16px 16px;
 
         &:hover {
             background-color: $gray-2;

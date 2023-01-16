@@ -1,0 +1,34 @@
+@import "_variables.scss";
+
+.sidebar-wrapper {
+    flex-shrink: 0;
+    padding-top: 24px;
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+
+        &__item {
+            padding: 16px 8px;
+
+            display: flex;
+            align-items: center;
+
+            &-icon {
+                padding-right: 8px;
+            }
+
+            &:hover {
+                background-color: $gray-2;
+            }
+
+            &--active {
+                font-weight: 600;
+
+                &:hover{
+                    background: none;
+                }
+            }
+        }
+    }
+
+}

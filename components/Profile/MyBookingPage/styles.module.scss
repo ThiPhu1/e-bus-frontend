@@ -1,0 +1,42 @@
+@import "_mixins.scss";
+
+.booking-container {
+    width: 100%;
+    // max-width: 580px;
+
+    padding: 32px 24px;
+
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    .heading {
+        @include text-headline-3;
+        margin-bottom: 24px;
+    }
+
+    .booking-info {
+        margin-top: 32px;
+
+        &__item {
+
+            display: flex;
+            justify-content: space-between;
+
+            @include sm-down{
+                flex-direction: column;
+            }
+
+            &:not(:first-child) {
+                margin-top: 16px;
+                padding-top: 8px;
+            }
+
+            &-title {
+                font-weight: 600;
+            }
+
+            &-value {}
+        }
+    }
+}
