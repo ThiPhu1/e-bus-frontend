@@ -1,7 +1,7 @@
 import moment from "moment";
 import QueryString from "qs";
-import CryptoJS from "crypto-js";
-import Hex from 'crypto-js/enc-hex';
+
+import crypto from "crypto"
 
 let Buffer = require('buffer/').Buffer;
 
@@ -49,17 +49,10 @@ const createOrder = async (req, res, next) => {
 
         vnp_Params = sortObject(vnp_Params);
 
+
         let signData = QueryString.stringify(vnp_Params, { encode: false });
-
-        let hmac = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA512, secretKey);
-        hmac.update(Buffer.from(signData, 'utf-8'));
-        let hash = hmac.finalize();
-        let signed = Hex.stringify(hash);
-
-        // let hmac = CryptoJS.HmacSHA512(Buffer.from(signData, 'utf-8'), secretKey)
-        // let signed = hmac.toString(CryptoJS.enc.Hex);
-
-        console.log("signed", signed);
+        let hmac = crypto.createHmac("sha512", secretKey);
+        let signed = hmac.update(new Buffer(signData, 'utf-8')).digest("hex"); 
 
         vnp_Params['vnp_SecureHash'] = signed;
         vnpUrl += '?' + QueryString.stringify(vnp_Params, { encode: false });

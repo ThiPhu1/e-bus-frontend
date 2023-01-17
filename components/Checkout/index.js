@@ -5,6 +5,7 @@ import { checkout } from "utils/constant/checkout";
 import { Button, Radio, Space } from 'antd';
 
 // import checkoutService from "utils/services/checkout";
+import vnPayService from "utils/services/vnpay";
 
 import { useRouter } from "next/router";
 import checkoutService from "utils/services/checkout";
@@ -42,11 +43,10 @@ export default function CheckoutPage({ route }) {
             locale: "vn",
         }
 
-        const res = await checkoutService?.createOrder({ body });
+        const res = await vnPayService?.createOrder({ body });
 
         if (res.status === 200) {
             const vnPayURL = res.data?.url;
-            
             if (vnPayURL) {
                 router.push(vnPayURL)
             }
