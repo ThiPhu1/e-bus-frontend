@@ -3,8 +3,14 @@ import styles from "./styles.module.scss";
 
 import { checkout } from "utils/constant/checkout";
 import { Button, Radio, Space } from 'antd';
-export default function CheckoutPage({ route }) {
 
+// import checkoutService from "utils/services/checkout";
+
+import { useRouter } from "next/router";
+import checkoutService from "utils/services/checkout";
+
+export default function CheckoutPage({ route }) {
+    const router = useRouter();
     const [routeInfo] = useState([
         {
             title: "Tuyến số",
@@ -24,6 +30,28 @@ export default function CheckoutPage({ route }) {
 
     const onPaymentMethodChange = (e) => {
         setPaymentMethod(e.target.value);
+    }
+
+    const handleCheckout = async () => {
+
+        const body = {
+            orderType:"260000",
+            amount: route?.route_price,
+            bankCode: "NCB",
+            orderDescription: `Thanh toan ve xe ${route?.route_name}`,
+            locale: "vn",
+        }
+
+        const res = await checkoutService?.createOrder({ body });
+
+        if (res.status === 200) {
+            const vnPayURL = res.data?.url;
+            
+            if (vnPayURL) {
+                router.push(vnPayURL)
+            }
+            return;
+        }
     }
 
     return (
@@ -90,7 +118,13 @@ export default function CheckoutPage({ route }) {
                     </ul>
 
                 </div>
-                <Button type="primary" htmlType="submit" size="large" block>
+                <Button
+                    type="primary"
+                    htmlType="submit"
+                    size="large"
+                    block
+                    onClick={handleCheckout}
+                >
                     Mua vé
                 </Button>
             </div>
