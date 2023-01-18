@@ -14,6 +14,7 @@ const apiEndPointList = {
     },
     order: {
         CREATE: (params) => `/api/order/create?${params}`,
+        VNPAY_ORDER_RETURN: `/api/order/vnpay-order-return`,
     }
 }
 
