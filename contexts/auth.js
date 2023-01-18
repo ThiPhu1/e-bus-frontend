@@ -46,7 +46,6 @@ const AuthProvider = (props) => {
 
     useEffect(() => {
         console.log("initcheck", initialCheck);
-        console.log("user", user);
 
     }, [initialCheck, user])
 

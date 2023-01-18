@@ -7,6 +7,8 @@ import { useState } from "react";
 
 import CardDetail from "./CardDetail";
 
+import getCurrencyFormat from "utils/constant/getCurrencyFormat";
+
 export default function RouteCard({ route }) {
     const router = useRouter();
     const [detailExpand, setDetailExpand] = useState(false);
@@ -54,7 +56,7 @@ export default function RouteCard({ route }) {
                     <div className={styles["route-card__top-right"]}>
                         <div className={styles["route-price"]}>
                             <span>Giá vé từ</span>
-                            <span className={styles["price"]}>{route?.route_price} VND</span>
+                            <span className={styles["price"]}>{`${getCurrencyFormat(route?.route_price)}`}</span>
                         </div>
                         <Button type="primary" size="large" block onClick={onBookBtnClick}>Đặt vé</Button>
                     </div>

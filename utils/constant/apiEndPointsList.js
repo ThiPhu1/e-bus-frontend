@@ -11,6 +11,9 @@ const apiEndPointList = {
     ticket: {
         GET_ALL : "/api/ticket",
         GET: (id) => `/api/ticket/${id}`,
+    },
+    order: {
+        CREATE: (params) => `/api/order/create?${params}`,
     }
 }
 

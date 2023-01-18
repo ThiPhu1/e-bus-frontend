@@ -1,17 +1,27 @@
 export const checkout = {
-    methods: [
+    paymentMethods: [
         {
             title: "Ví điện tử VNPay",
-            value: 0,
+            value: 1,
             isActive: true,
             default: true,
         },
         {
-            title: "Thẻ tín dụng/ghi nợ",
+            title: "Số dư ví tài khoản",
+            value: 2,
+            isActive: true,
+        }
+    ],
+    ticketTypes: [
+        {
+            title: "Vé lượt",
             value: 1,
-            isActive: false,
+            default: true,
+        },
+        {
+            title: "Vé tháng",
+            value: 2,
         }
     ]
-
 }
 
