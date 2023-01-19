@@ -9,7 +9,7 @@ export default function ProfileLayout({ children }) {
             <Navbar />
             <div className={styles["profile-container"]}>
                 <main className={styles["main-wrapper"]}>
-                    <ProfileSidebar />
+                    {/* <ProfileSidebar /> */}
                     {children}
                 </main>
             </div>

@@ -7,11 +7,21 @@ import { useState } from "react";
 import { Table } from "antd";
 import { useEffect } from "react";
 
+import getCurrencyFormat from "utils/constant/getCurrencyFormat";
+
+import { ticketConst } from "utils/constant/ticket";
+
 const columns = [
     {
         title: "Tuyến",
         dataIndex: "routeName",
         key: "routeName",
+        width: "30%",
+    },
+    {
+        title: "Thành tiền",
+        dataIndex: "amount",
+        key: "amount",
     },
     {
         title: "Ngày mua",
@@ -19,7 +29,7 @@ const columns = [
         key: "createdAt",
     },
     {
-        title: "Thời hạn",
+        title: "Hạn sử dụng",
         dataIndex: "expireDate",
         key: "expireDate",
     },
@@ -27,10 +37,13 @@ const columns = [
         title: "Trạng thái",
         dataIndex: "status",
         key: "status",
+        fixed: 'right',
+        width: "10%",
+        filters: ticketConst?.status,
+        onFilter: (value, record) => record?.status == value,
         render: (value) => {
-            if (value === "true") {
-                return <span style={{ color: "green" }}>Còn hiệu lực</span>
-            } else return <span style={{ color: "red" }}>Hết hạn</span>
+            const isActive = value;
+            return <span style={{ color: `${isActive ? "green" : "red"}` }}>{ticketConst?.status?.find((st) => !!st?.value === isActive)?.text}</span>
         }
     },
 ]
@@ -52,6 +65,7 @@ export default function MyBookingPage({ user, tickets }) {
                             routeName: ticketMatch?.route_name?.route_name,
                             createdAt: moment(ticketMatch?.createdAt).format('h:mm - DD/MM/YYYY'),
                             expireDate: moment(ticketMatch?.ticket_expired).format('h:mm - DD/MM/YYYY'),
+                            amount: getCurrencyFormat(ticketMatch?.ticket_price),
                             status: ticketMatch?.is_valid,
                         }
                     )
@@ -71,6 +85,9 @@ export default function MyBookingPage({ user, tickets }) {
             <Table
                 columns={columns}
                 dataSource={myBookingInfo}
+                scroll={{
+                    x: 960
+                }}
             />
         </div>
     );

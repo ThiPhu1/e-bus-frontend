@@ -1,9 +1,15 @@
+@import "_mixins.scss";
+
 .nav-user{
     position: relative;
     padding: 8px;
 
     .greeting{
         margin-right: 24px;
+
+        @include lg-down{
+            display: none;
+        }
     }
 
     .nav-setting-container{

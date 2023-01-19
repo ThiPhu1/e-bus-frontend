@@ -2,7 +2,7 @@ const apiEndPointList = {
     auth: {
         SIGN_IN: "/api/auth/login",
         SIGN_UP: "/api/auth/register",
-        REFRESH_ACCESS_TOKEN: "/api/ticket",
+        REFRESH_ACCESS_TOKEN: "/api/order",
     },
     route: {
         GET_ALL : "/api/route",

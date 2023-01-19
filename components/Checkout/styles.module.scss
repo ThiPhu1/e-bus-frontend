@@ -22,6 +22,10 @@
         display: flex;
         flex-direction: column;
         gap: 24px;
+
+        @include lg-down {
+            max-width: none;
+        }
     }
 
     &__right {
@@ -31,6 +35,10 @@
         display: flex;
         flex-direction: column;
         gap: 24px;
+
+        @include lg-down {
+            max-width: none;
+        }
     }
 
     .info-container {
@@ -78,11 +86,14 @@
                     padding-top: 8px;
                 }
 
-                &-title {
-                }
+                &-title {}
 
                 &-value {
                     font-weight: 600;
+
+                    @include sm-down {
+                        margin-top: 8px;
+                    }
                 }
             }
         }
