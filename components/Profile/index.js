@@ -32,7 +32,7 @@ export default function ProfilePage({ user }) {
                             className={styles["profile-info__item"]}
                             key={index}
                         >
-                            <span className={styles["profile-info__item-title"]}>{item?.title}:</span>
+                            <span className={styles["profile-info__item-title"]}>{item?.title}</span>
                             <span className={styles["profile-info__item-value"]}>{item?.value}</span>
                         </li>
                     })

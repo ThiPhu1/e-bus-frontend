@@ -47,11 +47,11 @@
                     font-weight: 600;
 
                     &::after {
-                        position: absolute;
-                        top: 100%;
-                        left: 50%;
+                        // position: absolute;
+                        // top: 100%;
+                        // left: 50%;
 
-                        transform: translateX(-50%);
+                        // transform: translateX(-50%);
 
                         padding: 2px 4px;
                         font-size: 10px;
@@ -77,8 +77,10 @@
                 }
 
                 .route-time-offset{
+                    margin-top: 12px;
+
                     display: flex;
-                    align-items: center;
+                    // align-items: center;
 
                     width: 100%;
 
@@ -114,6 +116,7 @@
 
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             gap: 16px;
 
             .route-price {
@@ -131,7 +134,7 @@
     }
 
     &__bottom {
-        margin-top: 32px;
+        margin-top: 16px;
 
         .route-detail-btn {
             padding: 2px 16px;
