@@ -15,4 +15,4 @@ export default withAuth(
 );
 
 // include protected route
-export const config = {matcher: ["/checkout/:path*"]};
+export const config = {matcher: ["/checkout/:path*", "/profile/:path*"]};
