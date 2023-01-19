@@ -1,0 +1,35 @@
+@import "_mixins.scss";
+
+.transaction-callback-wrapper{
+    width: 100%;
+    height: 100vh;
+
+    .transaction-callback{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-100%);
+
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 0 16px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        .transaction-info{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+
+            &__heading{
+                @include text-headline-2;
+            }
+        }
+
+
+    }
+}
