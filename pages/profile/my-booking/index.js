@@ -22,7 +22,7 @@ export default function MyBooking({ orders }) {
         }
     }, [sessionData])
 
-    return <MyBookingPage user={user} orders={orders}/>;
+    return <MyBookingPage orders={orders}/>;
 }
 
 MyBooking.getLayout = function getLayout(page) {

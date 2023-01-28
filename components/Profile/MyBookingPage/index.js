@@ -9,7 +9,9 @@ import { useEffect } from "react";
 
 import getCurrencyFormat from "utils/getCurrencyFormat";
 
-import { ticketConst } from "utils/constant/ticket";
+import { orderConst } from "utils/constant/order";
+
+import { checkout } from "utils/constant/checkout";
 
 const columns = [
     {
@@ -19,31 +21,40 @@ const columns = [
         width: "30%",
     },
     {
-        title: "Thành tiền",
-        dataIndex: "amount",
-        key: "amount",
+        title: "Hình thức thanh toán",
+        dataIndex: "order_type",
+        key: "order_type",
+        render: (value) => {
+            const paymentMethod = checkout?.paymentMethods?.find((pm) => pm?.value === value);
+            return paymentMethod?.title;
+        }
     },
     {
-        title: "Ngày mua",
+        title: "Thời gian",
         dataIndex: "createdAt",
         key: "createdAt",
     },
     {
-        title: "Hạn sử dụng",
-        dataIndex: "expireDate",
-        key: "expireDate",
+        title: "Thành tiền",
+        dataIndex: "amount",
+        key: "amount",
     },
+    // {
+    //     title: "Hạn sử dụng",
+    //     dataIndex: "expireDate",
+    //     key: "expireDate",
+    // },
     {
         title: "Trạng thái",
         dataIndex: "status",
         key: "status",
         fixed: 'right',
         width: "10%",
-        filters: ticketConst?.status,
+        filters: orderConst?.status,
         onFilter: (value, record) => record?.status == value,
         render: (value) => {
-            const isActive = value;
-            return <span style={{ color: `${isActive ? "green" : "red"}` }}>{ticketConst?.status?.find((st) => !!st?.value === isActive)?.text}</span>
+            const isActive = (value === "00");
+            return <span style={{ color: `${isActive ? "green" : "red"}` }}>{orderConst?.status?.find((st) => st?.value === value)?.text}</span>
         }
     },
 ]
@@ -57,10 +68,10 @@ export default function MyBookingPage({ orders }) {
             {
                 key: order?._id,
                 routeName: order?.route?.route_name,
-                createdAt: moment(order?.createdAt).format('h:mm - DD/MM/YYYY'),
-                expireDate: moment(order?.ticket?.ticket_expired).format('h:mm - DD/MM/YYYY'),
+                order_type: order?.order_type,
                 amount: getCurrencyFormat(order?.ticket?.ticket_price),
-                status: order?.ticket?.is_valid,
+                createdAt: moment(order?.createdAt).format('h:mm - DD/MM/YYYY'),
+                status: order?.order_status,
             }
         ))
 

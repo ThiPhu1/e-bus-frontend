@@ -23,13 +23,24 @@ export default function CheckoutCard({ itemInfo }) {
         setLoading(true);
         if (itemInfo) {
             const { paymentService, orderType, routeId, ticketType } = itemInfo;
-            const body = { ...paymentService, orderType: orderType };
+            const body = { ...paymentService, orderType };
             const queryString = `?routeId=${routeId}&ticketType=${ticketType}`;
             // console.log("click", body, params);
 
             const res = await orderService?.create({ body, queryString }, sessionData?.accessToken);
             if (res?.success) {
-                router.push(res.url);
+                console.log("type",ticketType);
+                switch (orderType) {
+                    case 1:
+                        router.push(res.url);
+                        break;
+                    case 2:
+                        const transactionCode = res?.code;
+                        router.push(`/checkout/transaction-result?code=${transactionCode}`)
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         setLoading(false);

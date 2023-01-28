@@ -1,13 +1,13 @@
 import styles from "../styles.module.scss";
-import orderService from "utils/services/order";
 
 import { Button, Result } from "antd";
-import { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 
+import { transactionConst } from "utils/constant/transaction";
+
 // const redirectTimeOut = 5;
-export default function VNPayCallback({ vnpay_result }) {
+export default function TransactionResult({ result }) {
     const router = useRouter();
 
     const handleRouting = (pathname) => {
@@ -33,19 +33,19 @@ export default function VNPayCallback({ vnpay_result }) {
         <div className={styles["transaction-callback-wrapper"]}>
             <div className={styles["transaction-callback"]}>
                 <Result
-                    status={vnpay_result?.success ? "success" : "error"}
-                    title={vnpay_result?.message}
+                    status={result?.success ? "success" : "error"}
+                    title={result?.message}
                     extra={[
                         <Button
                             type="primary"
                             key="primary"
                             onClick={() => handleRouting("/profile/my-booking")}
                         >
-                            {`Vé của tôi`} 
+                            {`Vé của tôi`}
                         </Button>,
                         <Button
-                            // type="secondary"
                             key="secondary"
+                            // type="secondary"
                             onClick={() => handleRouting("/route")}
                         >
                             Về trang chủ
@@ -60,18 +60,15 @@ export default function VNPayCallback({ vnpay_result }) {
 export async function getServerSideProps(ctx) {
     const { query } = ctx;
 
-    const queryString = `?${Object.keys(query)?.map((key) => (`${key}=${encodeURIComponent(query[key])}`)).join("&")}`;
-    const res = await orderService.getVnpayOrderReturn({ queryString });
-
-    console.log("vnpayReter", res);
+    const result = transactionConst?.walletStatus?.find((st) => st?.value === query?.code);
 
     return {
         props: {
-            vnpay_result: res,
+            result,
         }
     }
 }
 
-VNPayCallback.getLayout = function getLayout(page) {
+TransactionResult.getLayout = function getLayout(page) {
     return page;
 }
