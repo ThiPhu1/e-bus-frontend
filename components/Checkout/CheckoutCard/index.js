@@ -1,6 +1,6 @@
 import styles from "../styles.module.scss";
 import { useEffect, useState } from "react";
-import getCurrencyFormat from "utils/constant/getCurrencyFormat";
+import getCurrencyFormat from "utils/getCurrencyFormat";
 
 import orderService from "utils/services/order";
 

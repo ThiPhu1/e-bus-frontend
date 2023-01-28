@@ -3,9 +3,15 @@ import ProfileLayout from "layouts/Profile";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-import ticketService from "utils/services/ticket";
+import { authOptions } from "pages/api/auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth";
 
-export default function MyBooking({ tickets }) {
+import getOderByUserId from "utils/getOrderByUserId";
+
+// import ticketService from "utils/services/ticket";
+import orderService from "utils/services/order";
+
+export default function MyBooking({ orders }) {
     const { data: sessionData } = useSession();
 
     const [user, setUser] = useState();
@@ -16,7 +22,7 @@ export default function MyBooking({ tickets }) {
         }
     }, [sessionData])
 
-    return <MyBookingPage user={user} tickets={tickets}/>;
+    return <MyBookingPage user={user} orders={orders}/>;
 }
 
 MyBooking.getLayout = function getLayout(page) {
@@ -25,13 +31,25 @@ MyBooking.getLayout = function getLayout(page) {
     );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
+    const session = await unstable_getServerSession(ctx.req,ctx.res,authOptions);
 
-    const res = await ticketService.getMany();
+    const res = await orderService.getMany(session?.accessToken);
+
+    if(!res?.orders){
+        return {
+            props: {
+                orders: [],
+            }
+        }
+    }
+
+    const orderListByUserId = getOderByUserId({orders: res?.orders,userId: session?.user?._id})
+    console.log("orderListByUserId",orderListByUserId);
 
     return {
         props: {
-            tickets: res?.tickets,
+            orders: orderListByUserId,
         }
     }
 }

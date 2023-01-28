@@ -13,8 +13,9 @@ const apiEndPointList = {
         GET: (id) => `/api/ticket/${id}`,
     },
     order: {
+        GET_ALL : "/api/order",
         CREATE: (queryString) => `/api/order/create${queryString}`,
-        VNPAY_ORDER_RETURN: (queryString) => `/api/order/vnpay-order-return${queryString}`,
+        VNPAY_ORDER_RETURN: (queryString) => `/api/order/vnpay-return${queryString}`,
     }
 }
 

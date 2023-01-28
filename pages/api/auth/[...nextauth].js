@@ -22,7 +22,7 @@ const refreshAccessToken = async (refreshToken) => {
 //     return Date.now() + (parseInt(tokenExpire.slice(0,-1)) * 60 * 1000);
 // }
 
-const authOptions = {
+export const authOptions = {
     session: {
         strategy: "jwt",
     },

@@ -7,7 +7,7 @@ import { useState } from "react";
 
 import CardDetail from "./CardDetail";
 
-import getCurrencyFormat from "utils/constant/getCurrencyFormat";
+import getCurrencyFormat from "utils/getCurrencyFormat";
 
 export default function RouteCard({ route }) {
     const router = useRouter();

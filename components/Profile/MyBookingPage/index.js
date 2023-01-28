@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Table } from "antd";
 import { useEffect } from "react";
 
-import getCurrencyFormat from "utils/constant/getCurrencyFormat";
+import getCurrencyFormat from "utils/getCurrencyFormat";
 
 import { ticketConst } from "utils/constant/ticket";
 
@@ -48,36 +48,25 @@ const columns = [
     },
 ]
 
-export default function MyBookingPage({ user, tickets }) {
+export default function MyBookingPage({ orders }) {
 
     const [myBookingInfo, setMyBookingInfo] = useState();
 
     useEffect(() => {
-        const history = user?.history_purchase;
-        if (history && tickets) {
-            const purchasedTicketIds = history?.map((item) => item?.data_purchase?.ticket_id)
-            const purchasedTicketData = purchasedTicketIds?.map((tickectId) => {
-                const ticketMatch = tickets?.find((ticket) => ticket?._id === tickectId);
-                if (ticketMatch) {
-                    return (
-                        {
-                            key: ticketMatch?._id,
-                            routeName: ticketMatch?.route_name?.route_name,
-                            createdAt: moment(ticketMatch?.createdAt).format('h:mm - DD/MM/YYYY'),
-                            expireDate: moment(ticketMatch?.ticket_expired).format('h:mm - DD/MM/YYYY'),
-                            amount: getCurrencyFormat(ticketMatch?.ticket_price),
-                            status: ticketMatch?.is_valid,
-                        }
-                    )
-                } else return null;
-            })
+        const orderData = orders?.map((order) => (
+            {
+                key: order?._id,
+                routeName: order?.route?.route_name,
+                createdAt: moment(order?.createdAt).format('h:mm - DD/MM/YYYY'),
+                expireDate: moment(order?.ticket?.ticket_expired).format('h:mm - DD/MM/YYYY'),
+                amount: getCurrencyFormat(order?.ticket?.ticket_price),
+                status: order?.ticket?.is_valid,
+            }
+        ))
 
-            setMyBookingInfo(purchasedTicketData);
+        setMyBookingInfo(orderData);
 
-        }
-    }, [user, tickets])
-
-
+    }, [orders])
 
     return (
         <div className={styles["booking-container"]}>

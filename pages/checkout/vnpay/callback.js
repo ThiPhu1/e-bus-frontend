@@ -51,7 +51,6 @@ export default function VNPayCallback({ vnpay_result }) {
 export async function getServerSideProps(ctx) {
     const { query } = ctx;
 
-
     const queryString = `?${Object.keys(query)?.map((key) => (`${key}=${encodeURIComponent(query[key])}`)).join("&")}`;
     const res = await orderService.getVnpayOrderReturn({ queryString });
 
