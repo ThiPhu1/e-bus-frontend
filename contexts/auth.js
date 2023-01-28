@@ -6,7 +6,6 @@ const AuthContext = createContext();
 
 const AuthProvider = (props) => {
     const session = useSession();
-    const [user, setUser] = useState();
     const [initialCheck, setInitCheck] = useState(false);
 
     useEffect(() => {
@@ -26,34 +25,26 @@ const AuthProvider = (props) => {
         setInitCheck(true);
 
         if (status === "authenticated") {
-            const { data: { user } } = session;
-            if (user) {
-                setUser(user);
-                return;
-            }
         }
 
         // sign out if refresh token error while demanding new access token;
         if (data?.error) {
             if (data.error === "Invalid token") {
-                setUser(null);
                 signOut();
             }
         }
 
-        setUser(null);
     }, [session])
 
     useEffect(() => {
         console.log("initcheck", initialCheck);
 
-    }, [initialCheck, user])
+    }, [initialCheck])
 
     return (
         <AuthContext.Provider
             value={{
                 initialCheck,
-                user,
             }}
         >
             {props.children}

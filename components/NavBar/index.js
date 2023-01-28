@@ -5,11 +5,12 @@ import DefaultSecondaryNav from "./Default";
 import SignedInSecondaryNav from "./SignedIn";
 
 import { useAuthContext } from "contexts/auth";
-
+import { useSession } from "next-auth/react";
 import styles from "./styles.module.scss";
 
 export default function Navbar() {
-    const { initialCheck, user } = useAuthContext();
+    const { initialCheck } = useAuthContext();
+    const { data } = useSession();
 
     return (
         <div className={styles["navbar-wrapper"]}>
@@ -33,8 +34,8 @@ export default function Navbar() {
                         {
                             !initialCheck
                                 ? <></>
-                                : user
-                                    ? <SignedInSecondaryNav user={user} />
+                                : data?.user
+                                    ? <SignedInSecondaryNav user={data?.user} />
                                     : <DefaultSecondaryNav />
                         }
                     </div>
