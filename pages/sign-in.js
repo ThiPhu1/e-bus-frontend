@@ -29,7 +29,14 @@ export default function SignInPage() {
         console.log("res",res);
 
         if (res.status === 200) {
-            router.push("/route");
+            const callbackUrlParams = new URLSearchParams(res.url.split("?")[1]);
+            const callbackUrl = decodeURI(callbackUrlParams.get("callbackUrl"));
+            
+            if(callbackUrl){
+                router.push(callbackUrl)
+            } else {
+                router.push("/route");
+            }
         } else {
             api.error({
                 message: "Error",

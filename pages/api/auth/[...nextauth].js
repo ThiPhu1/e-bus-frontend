@@ -7,11 +7,11 @@ const refreshAccessToken = async (refreshToken) => {
     const { status, data, response } = res;
 
     if (response?.data && !response?.data?.sucess) {
-        res = {
+        return {
             error: response?.data?.message,
         };
     }
-    if(status === 200){
+    if (status === 200) {
         return data;
     }
 
@@ -32,7 +32,7 @@ const authOptions = {
             credential: {},
             async authorize(credential, req) {
                 const { username, password } = credential;
-                console.log("credential", credential);
+                // console.log("credential", credential);
                 const signInBody = {
                     username,
                     password
@@ -40,6 +40,8 @@ const authOptions = {
 
                 const res = await authServices.signIn({ body: signInBody })
                 const { status, data, response } = res;
+                console.log("res", res);
+
                 if (status === 200) {
                     return data;
                 }
@@ -69,7 +71,7 @@ const authOptions = {
 
             // get new acess token
             const newToken = await refreshAccessToken(token.refreshToken);
-            if(newToken?.error){
+            if (newToken?.error) {
                 token.error = newToken?.error;
             } else {
                 token.accessToken = newToken?.accessToken;
