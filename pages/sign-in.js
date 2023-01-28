@@ -30,9 +30,9 @@ export default function SignInPage() {
 
         if (res.status === 200) {
             const callbackUrlParams = new URLSearchParams(res.url.split("?")[1]);
-            const callbackUrl = decodeURI(callbackUrlParams.get("callbackUrl"));
-            
-            if(callbackUrl){
+            const callbackUrl = callbackUrlParams.get("callbackUrl") ? decodeURI(callbackUrlParams.get("callbackUrl")) : null;
+
+            if(!!callbackUrl){
                 router.push(callbackUrl)
             } else {
                 router.push("/route");
