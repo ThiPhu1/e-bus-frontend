@@ -33,10 +33,11 @@
             }
 
             &-title {
-                font-weight: 600;
             }
 
-            &-value {}
+            &-value {
+                font-weight: 600;
+            }
         }
     }
 }
