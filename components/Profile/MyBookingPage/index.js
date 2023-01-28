@@ -15,7 +15,13 @@ import { checkout } from "utils/constant/checkout";
 
 const columns = [
     {
-        title: "Tuyến",
+        title: "Mã số tuyến",
+        dataIndex: "routeNo",
+        key: "routeNo",
+        width: "10%",
+    },
+    {
+        title: "Tên tuyến",
         dataIndex: "routeName",
         key: "routeName",
         width: "30%",
@@ -25,6 +31,7 @@ const columns = [
         dataIndex: "order_type",
         key: "order_type",
         render: (value) => {
+            console.log("value",value);
             const paymentMethod = checkout?.paymentMethods?.find((pm) => pm?.value === value);
             return paymentMethod?.title;
         }
@@ -67,6 +74,7 @@ export default function MyBookingPage({ orders }) {
         const orderData = orders?.map((order) => (
             {
                 key: order?._id,
+                routeNo: order?.route?.route_number,
                 routeName: order?.route?.route_name,
                 order_type: order?.order_type,
                 amount: getCurrencyFormat(order?.ticket?.ticket_price),
@@ -81,14 +89,16 @@ export default function MyBookingPage({ orders }) {
 
     return (
         <div className={styles["booking-container"]}>
-            <h3 className={styles["heading"]}>Lịch sử mua vé</h3>
-            <Table
-                columns={columns}
-                dataSource={myBookingInfo}
-                scroll={{
-                    x: 960
-                }}
-            />
+            <h3 className={styles["heading"]}>Lịch sử đặt vé</h3>
+            <div className={styles["table-wrapper"]}>
+                <Table
+                    columns={columns}
+                    dataSource={myBookingInfo}
+                    scroll={{
+                        x: 960
+                    }}
+                />
+            </div>
         </div>
     );
 }
