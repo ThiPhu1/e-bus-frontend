@@ -4,6 +4,7 @@ import apiEndPointList from "utils/constant/apiEndPointsList";
 const orderService = {
     getMany: async (accessToken) => {
         let response = null;
+
         try {
             response = await baseGet({
                 endpoint: apiEndPointList.order.GET_ALL,
@@ -11,6 +12,7 @@ const orderService = {
                     "access_token": accessToken,
                 }
             });
+            console.log("order",response);
 
         } catch (err) {
             response = err;

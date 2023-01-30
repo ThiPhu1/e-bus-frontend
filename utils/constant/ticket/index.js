@@ -1,4 +1,14 @@
 export const ticketConst = {
+    type: [
+        {
+            label: "Vé lượt",
+            value: 1,
+        },
+        {
+            label: "Vé tháng",
+            value: 2,
+        },
+    ],
     status: [
         {
             text: "Hết hạn",

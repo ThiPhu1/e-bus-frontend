@@ -39,7 +39,7 @@ export default function VNPayCallback({ vnpay_result }) {
                         <Button
                             type="primary"
                             key="primary"
-                            onClick={() => handleRouting("/profile/my-booking")}
+                            onClick={() => handleRouting("/profile/my-ticket")}
                         >
                             {`Vé của tôi`} 
                         </Button>,

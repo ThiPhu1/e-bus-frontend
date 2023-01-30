@@ -39,7 +39,7 @@ export default function TransactionResult({ result }) {
                         <Button
                             type="primary"
                             key="primary"
-                            onClick={() => handleRouting("/profile/my-booking")}
+                            onClick={() => handleRouting("/profile/my-ticket")}
                         >
                             {`Vé của tôi`}
                         </Button>,

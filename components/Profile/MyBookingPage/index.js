@@ -13,6 +13,8 @@ import { orderConst } from "utils/constant/order";
 
 import { checkout } from "utils/constant/checkout";
 
+import { ticketConst } from "utils/constant/ticket";
+
 const columns = [
     {
         title: "Mã số tuyến",
@@ -27,11 +29,20 @@ const columns = [
         width: "30%",
     },
     {
+        title: "Loại vé",
+        dataIndex: "ticketType",
+        key: "ticketType",
+        width: "10%",
+        render: (value) => {
+            const ticketType = ticketConst?.type?.find((tk) => tk?.value === value);
+            return ticketType?.label;
+        }
+    },
+    {
         title: "Hình thức thanh toán",
         dataIndex: "order_type",
         key: "order_type",
         render: (value) => {
-            console.log("value",value);
             const paymentMethod = checkout?.paymentMethods?.find((pm) => pm?.value === value);
             return paymentMethod?.title;
         }
@@ -76,6 +87,7 @@ export default function MyBookingPage({ orders }) {
                 key: order?._id,
                 routeNo: order?.route?.route_number,
                 routeName: order?.route?.route_name,
+                ticketType: order?.ticket?.ticket_type,
                 order_type: order?.order_type,
                 amount: getCurrencyFormat(order?.ticket?.ticket_price),
                 createdAt: moment(order?.createdAt).format('h:mm - DD/MM/YYYY'),
