@@ -1,0 +1,13 @@
+.ticket-detail {
+    width: 100%;
+
+    &__code {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__notify {
+        display: block;
+        text-align: center;
+    }
+}

@@ -26,7 +26,6 @@ export async function getServerSideProps(ctx) {
     const session = await unstable_getServerSession(ctx.req,ctx.res,authOptions);
 
     const res = await orderService.getMany(session?.accessToken);
-    
     if(!res?.orders){
         return {
             props: {

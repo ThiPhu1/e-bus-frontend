@@ -3,11 +3,13 @@ import styles from "./styles.module.scss";
 
 import { ticketConst } from "utils/constant/ticket";
 
-import { Segmented, Empty, Skeleton, Modal } from "antd";
+import { Segmented, Empty, Modal } from "antd";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import TicketDetail from "./TicketDetail";
+
+import getCurrencyFormat from "utils/getCurrencyFormat";
 
 export default function MyTicketPage({ tickets }) {
 
@@ -15,6 +17,10 @@ export default function MyTicketPage({ tickets }) {
     const [ticketList, setTicketList] = useState();
 
     const [selectedTicket, setSelectedTicket] = useState();
+
+    const checkTicketValid = useCallback((ticket)=>{
+        return (ticket?.ticket_expired - Date.now() > 0) && ticket?.is_valid;
+    },[])
 
     const handleTicketTypeChange = (value) => {
         setCurrentType(value);
@@ -26,9 +32,18 @@ export default function MyTicketPage({ tickets }) {
 
     useEffect(() => {
         if (tickets && tickets?.length > 0) {
-            console.log("tickets", tickets);
-            const filterdTickets = tickets?.filter((ticket) => ticket?.qr_code && ticket?.ticket_type == currentType);
-            setTicketList(filterdTickets);
+            const filteredTickets = tickets?.filter((ticket) => {
+                if(ticket?.qr_code){
+                    let ticketType = ticket?.ticket_type;
+                    if(!ticket?.is_valid){
+                        ticketType = 0;
+                    }
+                    if(ticketType == currentType) {
+                        return ticket;
+                    }
+                }
+            });
+            setTicketList(filteredTickets);
         }
         return;
     }, [tickets, currentType])
@@ -50,17 +65,18 @@ export default function MyTicketPage({ tickets }) {
                     />
                 </div>
                 {
-                    tickets?.length > 0
+                    ticketList?.length > 0
                         ? <ul className={styles["ticket-list"]}>
                             {
                                 ticketList?.map((ticket) => (
                                     <li
-                                        className={`${styles["ticket-list__item"]} ${ticket?.is_valid ? "" : styles["is-invalid"]}`}
+                                        className={`${styles["ticket-list__item"]} ${checkTicketValid(ticket) ? "" : styles["is-invalid"]}`}
                                         key={ticket?._id}
                                     >
                                         <TicketItem
                                             ticket={ticket}
                                             handleTicketClick={handleTicketClick}
+                                            checkTicketValid={checkTicketValid}
                                         />
                                     </li>
                                     // <Skeleton />
@@ -74,6 +90,7 @@ export default function MyTicketPage({ tickets }) {
                 }
             </div>
             <Modal
+                width={"320px"}
                 open={!!selectedTicket}
                 onCancel={() => setSelectedTicket(null)}
                 footer={null}
@@ -84,10 +101,10 @@ export default function MyTicketPage({ tickets }) {
     );
 }
 
-function TicketItem({ ticket, handleTicketClick }) {
+function TicketItem({ ticket, handleTicketClick ,checkTicketValid }) {
 
     return (
-        <div className={`${styles["ticket"]}`} onClick={() => { handleTicketClick(ticket) }}>
+        <div className={`${styles["ticket"]}`} onClick={() => { checkTicketValid(ticket) ? handleTicketClick(ticket) : null }}>
             <div className={styles["ticket__left"]}>
                 <div className={styles["ticket-field-info"]}>
                     <span className={styles["ticket-field-info__label"]}>
@@ -107,7 +124,25 @@ function TicketItem({ ticket, handleTicketClick }) {
                 </div>
             </div>
             <div className={styles["ticket__right"]}>
-
+                <div className={styles["ticket-field-info"]}>
+                    <span className={styles["ticket-field-info__label"]}>
+                        Giá tiền
+                    </span>
+                    <span className={styles["ticket-field-info__value"]}>
+                        {getCurrencyFormat(ticket?.ticket_price)}
+                    </span>
+                </div>
+                {
+                    ticket?.ticket_type === 2 &&
+                    <div className={styles["ticket-field-info"]}>
+                        <span className={styles["ticket-field-info__label"]}>
+                            Số lần sử dụng
+                        </span>
+                        <span className={styles["ticket-field-info__value"]}>
+                            {ticket?.tap_count}
+                        </span>
+                    </div>
+                }
             </div>
         </div>
     );

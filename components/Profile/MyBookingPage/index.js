@@ -82,6 +82,7 @@ export default function MyBookingPage({ orders }) {
     const [myBookingInfo, setMyBookingInfo] = useState();
 
     useEffect(() => {
+        console.log("orders",orders);
         const orderData = orders?.map((order) => (
             {
                 key: order?._id,

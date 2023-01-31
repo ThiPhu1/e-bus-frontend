@@ -8,6 +8,11 @@
         display: flex;
         justify-content: space-between;
 
+        @include sm-down{
+            flex-direction: column;
+            gap: 16px;
+        }
+
         &-left {
             width: 100%;
             // max-width: 60%;
@@ -29,6 +34,7 @@
                 .route-subtitle {
                     color: $text-secondary;
                 }
+
             }
 
             .route-duration {
@@ -36,6 +42,10 @@
                 justify-content: space-between;
 
                 max-width: 50%;
+
+                @include sm-down{
+                    max-width: unset;
+                }
 
                 .route-time {
                     position: relative;
@@ -119,10 +129,20 @@
             justify-content: space-between;
             gap: 16px;
 
+            @include sm-down{
+                max-width: unset;
+                align-items: flex-start;
+                gap: 24px;
+            }
+
             .route-price {
                 display: flex;
                 align-items: flex-end;
                 flex-direction: column;
+
+                @include sm-down{
+                    align-items: flex-start;
+                }
 
                 .price {
                     @include text-headline-4;

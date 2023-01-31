@@ -12,7 +12,6 @@ const orderService = {
                     "access_token": accessToken,
                 }
             });
-            console.log("order",response);
 
         } catch (err) {
             response = err;
