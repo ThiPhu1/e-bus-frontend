@@ -5,7 +5,7 @@ import authServices from "utils/services/auth";
 const refreshAccessToken = async (refreshToken) => {
     let res = await authServices.refreshAccessToken(refreshToken);
     const { status, data, response } = res;
-
+    
     if (response?.data && !response?.data?.sucess) {
         return {
             error: response?.data?.message,
@@ -32,7 +32,6 @@ export const authOptions = {
             credential: {},
             async authorize(credential, req) {
                 const { username, password } = credential;
-                // console.log("credential", credential);
                 const signInBody = {
                     username,
                     password

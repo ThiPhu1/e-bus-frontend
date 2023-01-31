@@ -32,10 +32,10 @@ const authServices = {
     refreshAccessToken: async (refreshToken) => {
         let response = null;
         try {
-            response = await baseGet({
+            response = await basePost({
                 endpoint: apiEndPointList.auth.REFRESH_ACCESS_TOKEN,
                 headers: {
-                    refresh_token: refreshToken,
+                    "refresh_token": refreshToken,
                 }
             });
         } catch (err) {
