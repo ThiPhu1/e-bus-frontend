@@ -11,16 +11,20 @@ import TicketDetail from "./TicketDetail";
 
 import getCurrencyFormat from "utils/getCurrencyFormat";
 
-export default function MyTicketPage({ tickets }) {
+import ticketService from "utils/services/ticket";
+import getEntityByUserId from "utils/getEntityByUserId";
 
+import { useSession } from "next-auth/react";
+
+export default function MyTicketPage() {
+    const { data: sessionData } = useSession();
     const [currentType, setCurrentType] = useState(ticketConst?.type[0].value);
     const [ticketList, setTicketList] = useState();
-
     const [selectedTicket, setSelectedTicket] = useState();
 
-    const checkTicketValid = useCallback((ticket)=>{
+    const checkTicketValid = useCallback((ticket) => {  
         return (ticket?.ticket_expired - Date.now() > 0) && ticket?.is_valid;
-    },[])
+    }, [])
 
     const handleTicketTypeChange = (value) => {
         setCurrentType(value);
@@ -30,15 +34,18 @@ export default function MyTicketPage({ tickets }) {
         console.log("selectedTicket", selectedTicket);
     }, [selectedTicket])
 
-    useEffect(() => {
-        if (tickets && tickets?.length > 0) {
-            const filteredTickets = tickets?.filter((ticket) => {
-                if(ticket?.qr_code){
+    const fetchTicketList = async (currentType) => {
+        const ticketList = await ticketService.getMany(sessionData?.accessToken);
+        if (ticketList) {
+            const ticketListByUserId = getEntityByUserId(ticketList?.tickets, sessionData?.user?._id);
+
+            const filteredTickets = ticketListByUserId?.filter((ticket) => {
+                if (ticket?.qr_code) {
                     let ticketType = ticket?.ticket_type;
-                    if(!ticket?.is_valid){
+                    if (!ticket?.is_valid) {
                         ticketType = 0;
                     }
-                    if(ticketType == currentType) {
+                    if (ticketType == currentType) {
                         return ticket;
                     }
                 }
@@ -46,7 +53,12 @@ export default function MyTicketPage({ tickets }) {
             setTicketList(filteredTickets);
         }
         return;
-    }, [tickets, currentType])
+    }
+
+    useEffect(() => {
+        fetchTicketList(currentType);
+    }, [currentType])
+
 
     const handleTicketClick = (ticket) => {
         setSelectedTicket(ticket);
@@ -101,7 +113,7 @@ export default function MyTicketPage({ tickets }) {
     );
 }
 
-function TicketItem({ ticket, handleTicketClick ,checkTicketValid }) {
+function TicketItem({ ticket, handleTicketClick, checkTicketValid }) {
 
     return (
         <div className={`${styles["ticket"]}`} onClick={() => { checkTicketValid(ticket) ? handleTicketClick(ticket) : null }}>
