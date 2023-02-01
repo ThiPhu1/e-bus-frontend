@@ -2,8 +2,10 @@
 @import "_variables.scss";
 
 .nav-wrapper {
+    display: flex;
+    gap: 24px;
+    
     @include sm-down {
-        display: flex;
         flex-direction: column;
         gap: 8px;
     }

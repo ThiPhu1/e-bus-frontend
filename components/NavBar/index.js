@@ -50,6 +50,7 @@ export default function Navbar() {
                         <a >
                             <Image
                                 src="/common/main_logo.png"
+                                alt="main_logo"
                                 height={73}
                                 width={150}
                             />
