@@ -29,7 +29,7 @@ const AuthProvider = (props) => {
 
         // sign out if refresh token error while demanding new access token;
         if (data?.error) {
-            if (data.error === "Invalid token") {
+            if (data.error === "Invalid Token") {
                 signOut();
             }
         }
