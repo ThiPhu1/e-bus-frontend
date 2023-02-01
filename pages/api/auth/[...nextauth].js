@@ -87,7 +87,8 @@ export const authOptions = {
             session.error = token?.error ? token.error : null;
             return session
         }
-    }
+    },
+    secret: process.env.NEXT_PUBLIC_NEXT_AUTH_SECRET
 }
 
 export default NextAuth(authOptions);
