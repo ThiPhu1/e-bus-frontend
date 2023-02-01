@@ -7,7 +7,7 @@
     left: 0;
 
     width: 100%;
-    background-color: $body-bg;
+    background-color: #fff;
     
     z-index: 999;
 
@@ -34,6 +34,15 @@
                 display: flex;
                 gap: 16px;
             }
+        }
+
+        &__menu-btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+
+            cursor: pointer;
         }
     }
 }

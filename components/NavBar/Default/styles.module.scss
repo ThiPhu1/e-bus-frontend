@@ -1,0 +1,10 @@
+@import "_mixins.scss";
+@import "_variables.scss";
+
+.nav-wrapper {
+    @include sm-down {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+}

@@ -8,34 +8,39 @@ import NavSettingMenu from "./NavSettingMenu";
 
 import styles from "./styles.module.scss";
 
-export default function SignedInSecondaryNav({ user }) {
+export default function SignedInSecondaryNav({ user, isMobile, onMenuClose }) {
     return (
         <div className={styles["nav-wrapper"]}>
-            <ul className={styles["nav-list"]}>
-                {
-                    signedInNavItems?.map((item, index) => (
-                        <li
-                            className={styles["nav-list__item"]}
-                            key={index}
-                        >
-                            <Link
-                                href={item?.pathName}
+            {
+                !isMobile &&
+                <ul className={styles["nav-list"]}>
+                    {
+                        signedInNavItems?.map((item, index) => (
+                            <li
+                                className={styles["nav-list__item"]}
+                                key={index}
                             >
-                                <a href={item?.pathName}>
-                                    {item?.title}
-                                </a>
-                            </Link>
-                        </li>
-                    ))
-                }
-            </ul>
+                                <Link
+                                    href={item?.pathName}
+                                >
+                                    <a href={item?.pathName}>
+                                        {item?.title}
+                                    </a>
+                                </Link>
+                            </li>
+                        ))
+                    }
+                </ul>
+            }
             <div className={styles["nav-user"]}>
                 {/* <span className={styles["greeting"]}>Xin chào, {user?.username}</span> */}
-                <Avatar
-                    icon={<UserOutlined />}
-                />
+                {
+                    !isMobile && <Avatar
+                        icon={<UserOutlined />}
+                    />
+                }
                 <div className={styles["nav-setting-container"]}>
-                    <NavSettingMenu />
+                    <NavSettingMenu isMobile={isMobile} onMenuClose={onMenuClose} />
                 </div>
             </div>
         </div>

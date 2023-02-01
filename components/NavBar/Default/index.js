@@ -1,19 +1,21 @@
 import Link from "next/link";
 import { Button } from "antd";
 
-export default function DefaultSecondaryNav() {
+import styles from "./styles.module.scss";
+
+export default function DefaultSecondaryNav({ isMobile, onMenuClose }) {
     return (
-        <>
+        <div className={styles["nav-wrapper"]}>
             <Link
                 href="/sign-in"
             >
-                <Button type="text" size="large">Đăng nhập</Button>
+                <Button type="text" size="large" block={isMobile} onClick={isMobile && onMenuClose}>Đăng nhập</Button>
             </Link>
             <Link
                 href="/sign-up"
             >
-                <Button type="primary" size="large">Đăng kí</Button>
+                <Button type="primary" size="large" block={isMobile} onClick={isMobile && onMenuClose}>Đăng kí</Button>
             </Link>
-        </>
+        </div>
     );
 }

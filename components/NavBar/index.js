@@ -6,11 +6,38 @@ import SignedInSecondaryNav from "./SignedIn";
 
 import { useAuthContext } from "contexts/auth";
 import { useSession } from "next-auth/react";
+
 import styles from "./styles.module.scss";
+
+import useWindowDimensions from "utils/useWindowDimension";
+import { useState, useEffect } from "react";
+
+import { MenuOutlined } from "@ant-design/icons";
+import { Drawer } from "antd";
 
 export default function Navbar() {
     const { initialCheck } = useAuthContext();
     const { data } = useSession();
+
+    const dimension = useWindowDimensions();
+
+    const [isMobile, setIsMobile] = useState();
+
+    useEffect(() => {
+        if (dimension) {
+            setIsMobile(dimension?.width < 576)
+        }
+    }, [dimension])
+
+    const [showMenu, setMenuState] = useState(false);
+
+    const onMenuBtnClick = () => {
+        setMenuState(true);
+    }
+
+    const onMenuClose = () => {
+        setMenuState(false);
+    }
 
     return (
         <div className={styles["navbar-wrapper"]}>
@@ -32,11 +59,33 @@ export default function Navbar() {
                 <div className={styles["navbar__right"]}>
                     <div className={styles["navbar__right-container"]}>
                         {
-                            !initialCheck
-                                ? <></>
-                                : data?.user
-                                    ? <SignedInSecondaryNav user={data?.user} />
-                                    : <DefaultSecondaryNav />
+                            isMobile
+                                ? <>
+                                    <span className={styles["navbar__menu-btn"]} onClick={onMenuBtnClick}><MenuOutlined /></span>
+                                    <Drawer
+                                        placement="right"
+                                        open={showMenu}
+                                        onClose={onMenuClose}
+                                        width={"50%"}
+                                    >
+                                        {
+                                            !initialCheck
+                                                ? <></>
+                                                : data?.user
+                                                    ? <SignedInSecondaryNav user={data?.user} isMobile={isMobile} onMenuClose={onMenuClose} />
+                                                    : <DefaultSecondaryNav isMobile={isMobile} onMenuClose={onMenuClose} />
+                                        }
+                                    </Drawer>
+                                </>
+                                : <>
+                                    {
+                                        !initialCheck
+                                            ? <></>
+                                            : data?.user
+                                                ? <SignedInSecondaryNav user={data?.user} />
+                                                : <DefaultSecondaryNav />
+                                    }
+                                </>
                         }
                     </div>
                 </div>

@@ -11,8 +11,8 @@
         &__item {
             position: relative;
 
-            &:hover{
-                &:after{
+            &:hover {
+                &:after {
                     content: "";
                     position: absolute;
                     bottom: -0.25rem;
@@ -31,13 +31,14 @@
         position: relative;
         padding: 8px;
 
-        .greeting {
-            margin-right: 24px;
+        // .greeting {
+        //     margin-right: 24px;
 
-            @include lg-down {
-                display: none;
-            }
-        }
+        //     @include lg-down {
+        //         display: none;
+        //     }
+
+        // }
 
         .nav-setting-container {
             position: absolute;
@@ -49,6 +50,13 @@
             visibility: hidden;
 
             transition: all .25s ease-in-out;
+
+            @include sm-down{
+                position: relative;
+
+                opacity: 1;
+                visibility: visible;
+            }
         }
 
         &:hover {
@@ -56,6 +64,13 @@
                 opacity: 1;
                 visibility: visible;
             }
+        }
+
+        @include sm-down{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: unset;
         }
 
     }

@@ -4,8 +4,9 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 
 import { settingMenu } from "utils/constant/navbar/settingMenu";
+import { signedInNavItems } from "utils/constant/navbar/signedIn";
 
-export default function NavSettingMenu() {
+export default function NavSettingMenu({ isMobile, onMenuClose }) {
 
     const onSignOutBtnCLick = () => {
         signOut();
@@ -19,6 +20,8 @@ export default function NavSettingMenu() {
                         <li
                             className={styles["nav-setting__item"]}
                             key={index}
+                            onClick={isMobile && onMenuClose}
+                            
                         >
                             <Link
                                 href={item?.pathName}
@@ -30,8 +33,26 @@ export default function NavSettingMenu() {
                         </li>
                     )
                 }
+                {
+                    isMobile &&
+                    signedInNavItems?.map((item, index) => (
+                        <li
+                            className={styles["nav-setting__item"]}
+                            key={index}
+                            onClick={isMobile && onMenuClose}
+                        >
+                            <Link
+                                href={item?.pathName}
+                            >
+                                <a href={item?.pathName}>
+                                    {item?.title}
+                                </a>
+                            </Link>
+                        </li>
+                    ))
+                }
             </ul>
-            <hr className={styles["divider"]}/>
+            <hr className={styles["divider"]} />
             <a
                 type="button"
                 className={styles["sign-out-btn"]}
