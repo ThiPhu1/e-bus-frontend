@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 
 import { ticketConst } from "utils/constant/ticket";
 
-import { Segmented, Empty, Modal } from "antd";
+import { Segmented, Empty, Modal, Spin } from "antd";
 
 import { useState, useEffect, useCallback } from "react";
 
@@ -13,7 +13,6 @@ import getCurrencyFormat from "utils/getCurrencyFormat";
 
 import ticketService from "utils/services/ticket";
 import getEntityByUserId from "utils/getEntityByUserId";
-
 import { useSession } from "next-auth/react";
 
 export default function MyTicketPage() {
@@ -21,8 +20,9 @@ export default function MyTicketPage() {
     const [currentType, setCurrentType] = useState(ticketConst?.type[0].value);
     const [ticketList, setTicketList] = useState();
     const [selectedTicket, setSelectedTicket] = useState();
+    const [isFetching, setIsFetching] = useState(false);
 
-    const checkTicketValid = useCallback((ticket) => {  
+    const checkTicketValid = useCallback((ticket) => {
         return (ticket?.ticket_expired - Date.now() > 0) && ticket?.is_valid;
     }, [])
 
@@ -35,6 +35,7 @@ export default function MyTicketPage() {
     }, [selectedTicket])
 
     const fetchTicketList = async (currentType) => {
+        setIsFetching(true);
         const ticketList = await ticketService.getMany(sessionData?.accessToken);
         if (ticketList) {
             const ticketListByUserId = getEntityByUserId(ticketList?.tickets, sessionData?.user?._id);
@@ -52,6 +53,7 @@ export default function MyTicketPage() {
             });
             setTicketList(filteredTickets);
         }
+        setIsFetching(false);
         return;
     }
 
@@ -77,28 +79,30 @@ export default function MyTicketPage() {
                     />
                 </div>
                 {
-                    ticketList?.length > 0
-                        ? <ul className={styles["ticket-list"]}>
-                            {
-                                ticketList?.map((ticket) => (
-                                    <li
-                                        className={`${styles["ticket-list__item"]} ${checkTicketValid(ticket) ? "" : styles["is-invalid"]}`}
-                                        key={ticket?._id}
-                                    >
-                                        <TicketItem
-                                            ticket={ticket}
-                                            handleTicketClick={handleTicketClick}
-                                            checkTicketValid={checkTicketValid}
-                                        />
-                                    </li>
-                                    // <Skeleton />
-                                ))
+                    isFetching
+                        ? <div className={styles["loading"]}><Spin /></div>
+                        : ticketList?.length > 0
+                            ? <ul className={styles["ticket-list"]}>
+                                {
+                                    ticketList?.map((ticket) => (
+                                        <li
+                                            className={`${styles["ticket-list__item"]} ${checkTicketValid(ticket) ? "" : styles["is-invalid"]}`}
+                                            key={ticket?._id}
+                                        >
+                                            <TicketItem
+                                                ticket={ticket}
+                                                handleTicketClick={handleTicketClick}
+                                                checkTicketValid={checkTicketValid}
+                                            />
+                                        </li>
+                                        // <Skeleton />
+                                    ))
 
-                            }
-                        </ul>
-                        : <div className={styles["ticket-list--empty"]}>
-                            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-                        </div>
+                                }
+                            </ul>
+                            : <div className={styles["ticket-list--empty"]}>
+                                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                            </div>
                 }
             </div>
             <Modal
