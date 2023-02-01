@@ -10,8 +10,8 @@ import { useState } from "react";
 
 import { useRouter } from "next/router";
 
-const bcrypt = require('bcryptjs');
-const b_salt = process.env.NEXT_PUBLIC_API_BCRYPT_SALT;
+// const bcrypt = require('bcryptjs');
+// const b_salt = process.env.NEXT_PUBLIC_API_BCRYPT_SALT;
 
 export default function SignUpPage() {
     const router = useRouter();
@@ -22,14 +22,14 @@ export default function SignUpPage() {
     const onSignUpHandle = async ({ username, fullname, phoneNumber, password }) => {
         setSubmitState(true);
 
-        const salt = bcrypt.genSaltSync(parseInt(b_salt));
-        const hashedPwd = bcrypt.hashSync(password, salt)
+        // const salt = bcrypt.genSaltSync(parseInt(b_salt));
+        // const hashedPwd = bcrypt.hashSync(password, salt)
 
         const body = {
             phoneNumber,
             username,
             fullname,
-            password: hashedPwd,
+            password: password,
         }
 
         const res = await authServices.signUp({ body });
