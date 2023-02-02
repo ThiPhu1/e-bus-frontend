@@ -33,7 +33,7 @@ export default function SignedInSecondaryNav({ user, isMobile, onMenuClose }) {
                 </ul>
             }
             <div className={styles["nav-user"]}>
-                {/* <span className={styles["greeting"]}>Xin chào, {user?.username}</span> */}
+                <span className={styles["greeting"]}>{user?.username}</span>
                 {
                     !isMobile && <Avatar
                         icon={<UserOutlined />}

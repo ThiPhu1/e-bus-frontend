@@ -31,14 +31,15 @@
         position: relative;
         padding: 8px;
 
-        // .greeting {
-        //     margin-right: 24px;
+        .greeting {
+            margin-right: 8px;
+            font-size: 14px;
 
-        //     @include lg-down {
-        //         display: none;
-        //     }
+            @include sm-down {
+                display: none;
+            }
 
-        // }
+        }
 
         .nav-setting-container {
             position: absolute;
