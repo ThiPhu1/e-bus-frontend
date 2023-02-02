@@ -1,3 +1,5 @@
+@import "_mixins.scss";
+
 .ticket-detail {
     width: 100%;
 
@@ -6,7 +8,40 @@
         justify-content: center;
     }
 
+    &__info {
+        margin: 16px 0;
+
+        &-item {
+            display: flex;
+            justify-content: space-between;
+
+            @include sm-down {
+                flex-direction: column;
+            }
+
+            &:not(:first-child) {
+                padding-top: 8px;
+            }
+
+            &-title {
+                flex-basis: 30%;
+                margin-bottom: 4px;
+            }
+
+            &-value {
+                flex-basis: 70%;
+                text-align: end;
+                font-weight: 600;
+
+                @include sm-down {
+                    text-align: start;
+                }
+            }
+        }
+    }
+
     &__notify {
+        margin-top: 16px;
         display: block;
         text-align: center;
     }
