@@ -6,6 +6,8 @@ import RouteCard from "./RouteCard";
 
 import styles from "./styles.module.scss";
 
+import { Empty } from "antd";
+
 export default function RoutePage({ routes }) {
     const [routeList, setRouteList] = useState(routes);
 
@@ -13,17 +15,19 @@ export default function RoutePage({ routes }) {
         <div className={`${styles["home-container"]} container`}>
             {/* <FilterSection /> */}
             <div className={styles["main-section"]}>
-                <SearchBar />
+                <SearchBar setRouteList={setRouteList} />
                 <div className={styles["route-list-wrapper"]}>
                     <ul className={styles["route"]}>
                         {
-                            routeList?.map((route, index) => {
-                                return (
-                                    <li className={styles["route__item"]} key={index}>
-                                        <RouteCard route={route} />
-                                    </li>
-                                );
-                            })
+                            routeList?.length > 0
+                                ? routeList?.map((route, index) => {
+                                    return (
+                                        <li className={styles["route__item"]} key={index}>
+                                            <RouteCard route={route} />
+                                        </li>
+                                    );
+                                })
+                                : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                         }
                     </ul>
                 </div>

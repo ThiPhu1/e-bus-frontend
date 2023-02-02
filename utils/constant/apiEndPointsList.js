@@ -5,7 +5,7 @@ const apiEndPointList = {
         REFRESH_ACCESS_TOKEN: "/api/auth/refresh-token",
     },
     route: {
-        GET_ALL : "/api/route",
+        GET_ALL : (searchQuery) => searchQuery ? `/api/route/${searchQuery}` : `/api/route`,
         GET: (id) => `/api/route/${id}`,
     },
     ticket: {

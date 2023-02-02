@@ -5,9 +5,6 @@ import routeService from "utils/services/route";
 import RoutePage from "components/Route";
 
 export default function Home({ routes }) {
-  useEffect(() => {
-    console.log("routes", routes);
-  }, [routes])
 
   return <RoutePage routes={routes} />
 }

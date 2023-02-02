@@ -5,17 +5,30 @@ import {
 
 import { Form, Input, Button } from "antd";
 
-const { Search } = Input;
+import routeService from "utils/services/route";
+import {useState} from "react";
 
-export default function SearchBar() {
+export default function SearchBar({ setRouteList }) {
+    const [isSearching,setIsSearching] = useState(false);
+
+    const onSearchInput = async (e) => {
+        setIsSearching(true);
+        const searchVal = e.target.value?.trim();
+        const query = searchVal ? `?route_number=${searchVal}` : null;
+        const res = await routeService.getMany(query)
+
+        setRouteList(res?.routes ? res.routes : []);
+        setIsSearching(false);
+    }
+
     return (
         <div className={styles["searchBar"]}>
-            <Search
+            <Input
                 prefix={<SearchOutlined />}
-                placeholder="Tìm kiếm địa điểm"
-                enterButton="Tìm kiếm"
+                placeholder="Tìm tuyến xe"
                 size="large"
                 allowClear
+                onChange={onSearchInput}
             />
         </div>
     );
