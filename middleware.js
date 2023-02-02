@@ -10,7 +10,8 @@ export default withAuth(
                 // console.log("token in authorized",token);
                 return token?.user;
             }
-        }
+        },
+        secret: process.env.NEXTAUTH_SECRET,
     }
 );
 
