@@ -44,7 +44,7 @@ export default function Navbar() {
             <div className={styles["navbar"]}>
                 <div className={styles["navbar__left"]}>
                     <Link
-                        href="/route"
+                        href="/"
                         passHref
                     >
                         <a >

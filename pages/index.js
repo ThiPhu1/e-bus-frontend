@@ -1,13 +1,29 @@
 import MainLayout from "layouts/Main";
 import { useEffect } from "react";
+import routeService from "utils/services/route";
 
-export default function Home() {
+import RoutePage from "components/Route";
 
-  return <></>
+export default function Home({ routes }) {
+  useEffect(() => {
+    console.log("routes", routes);
+  }, [routes])
+
+  return <RoutePage routes={routes} />
 }
 
 Home.getLayout = function getLayout(page) {
   return (
     <MainLayout>{page}</MainLayout>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  const res = await routeService.getMany();
+
+  return {
+    props: {
+      routes: res?.routes ?? [],
+    }
+  }
 }

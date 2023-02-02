@@ -46,7 +46,7 @@ export default function TransactionResult({ result }) {
                         <Button
                             key="secondary"
                             // type="secondary"
-                            onClick={() => handleRouting("/route")}
+                            onClick={() => handleRouting("/")}
                         >
                             Về trang chủ
                         </Button>,

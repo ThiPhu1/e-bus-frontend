@@ -35,7 +35,7 @@ export default function SignInPage() {
             if(!!callbackUrl){
                 router.push(callbackUrl)
             } else {
-                router.push("/route");
+                router.push("/");
             }
         } else {
             api.error({
