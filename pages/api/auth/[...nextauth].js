@@ -39,7 +39,7 @@ export const authOptions = {
 
                 const res = await authServices.signIn({ body: signInBody })
                 const { status, data, response } = res;
-                console.log("res", res);
+                // console.log("res", res);
 
                 if (status === 200) {
                     return data;
@@ -50,6 +50,7 @@ export const authOptions = {
             },
         })
     ],
+    secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: "/sign-in",
     },
@@ -63,7 +64,7 @@ export const authOptions = {
             }
 
             const shouldRefreshTime = Math.round((token.accessExpir - process.env.NEXT_PUBLIC_REFRESH_ACCESS_TOKEN_TIME_MARGIN) - Date.now());
-            console.log("shouldRefreshTime", shouldRefreshTime);
+            // console.log("shouldRefreshTime", shouldRefreshTime);
             if (shouldRefreshTime > 0) {
                 return token
             }
@@ -88,7 +89,6 @@ export const authOptions = {
             return session
         }
     },
-    secret: "3uUj7TDhGC",
 }
 
 export default NextAuth(authOptions);
