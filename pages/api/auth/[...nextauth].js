@@ -50,7 +50,6 @@ export const authOptions = {
             },
         })
     ],
-    secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: "/sign-in",
     },
@@ -87,7 +86,8 @@ export const authOptions = {
             session.accessExpir = token.accessExpir;
             session.error = token?.error ? token.error : null;
             return session
-        }
+        },
+        secret: process.env.NEXTAUTH_SECRET,
     },
 }
 
