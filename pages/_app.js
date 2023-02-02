@@ -12,9 +12,9 @@ function Layout({ Component, pageProps }) {
 
   const [interval,setInterval] = useState(0);
 
-  useEffect(()=>{
-    console.log("interval",interval);
-  },[interval])
+  // useEffect(()=>{
+  //   console.log("interval",interval);
+  // },[interval])
 
   return (
     <SessionProvider session={pageProps.session} refetchInterval={interval}>

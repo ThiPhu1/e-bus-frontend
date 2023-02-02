@@ -16,7 +16,7 @@ const authServices = {
         return response;
     },
     signUp: async ({ body }) => {
-        console.log("body", body);
+        // console.log("body", body);
         let response = null;
         try {
             response = await basePost({

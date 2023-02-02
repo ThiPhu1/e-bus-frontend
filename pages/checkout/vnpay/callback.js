@@ -63,7 +63,7 @@ export async function getServerSideProps(ctx) {
     const queryString = `?${Object.keys(query)?.map((key) => (`${key}=${encodeURIComponent(query[key])}`)).join("&")}`;
     const res = await orderService.getVnpayOrderReturn({ queryString });
 
-    console.log("vnpayReter", res);
+    // console.log("vnpayReter", res);
 
     return {
         props: {

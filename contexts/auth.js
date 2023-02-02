@@ -36,10 +36,10 @@ const AuthProvider = (props) => {
 
     }, [session])
 
-    useEffect(() => {
-        console.log("initcheck", initialCheck);
+    // useEffect(() => {
+    //     console.log("initcheck", initialCheck);
 
-    }, [initialCheck])
+    // }, [initialCheck])
 
     return (
         <AuthContext.Provider

@@ -15,9 +15,9 @@ export default function CheckoutCard({ itemInfo }) {
 
     const [isLoading, setLoading] = useState(false);
 
-    useEffect(() => {
-        console.log("sessionData", sessionData);
-    }, [sessionData])
+    // useEffect(() => {
+    //     console.log("sessionData", sessionData);
+    // }, [sessionData])
 
     const handleCheckout = async () => {
         setLoading(true);

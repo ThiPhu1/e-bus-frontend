@@ -30,10 +30,6 @@ export default function MyTicketPage() {
         setCurrentType(value);
     }
 
-    useEffect(() => {
-        console.log("selectedTicket", selectedTicket);
-    }, [selectedTicket])
-
     const fetchTicketList = async (currentType) => {
         setIsFetching(true);
         const ticketList = await ticketService.getMany(sessionData?.accessToken);

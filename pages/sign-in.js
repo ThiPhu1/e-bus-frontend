@@ -26,7 +26,7 @@ export default function SignInPage() {
             redirect: false,
         })
         
-        console.log("res",res);
+        // console.log("res",res);
 
         if (res.status === 200) {
             const callbackUrlParams = new URLSearchParams(res.url.split("?")[1]);

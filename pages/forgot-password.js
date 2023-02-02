@@ -6,7 +6,7 @@ import { authFormFields } from "utils/constant/authFormFields";
 export default function SignInPage() {
 
     const onPasswordResetHandle = (values) => {
-        console.log("submitted", values);
+        // console.log("submitted", values);
     }
 
     return (
