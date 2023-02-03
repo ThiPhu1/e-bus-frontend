@@ -2,7 +2,11 @@ import styles from "../styles.module.scss";
 
 import { Radio, Space } from 'antd';
 
+// import { useSession } from "next-auth/react";
+// import getCurrencyFormat from "utils/getCurrencyFormat";
+
 export default function OptionsCard({ route, itemInfo, updateIntemInfo, checkoutConst }) {
+    // const { data: sessionData } = useSession();
 
     const onTicketTypeChange = (e) => {
         updateIntemInfo(e.target.name, e.target.value);
@@ -18,9 +22,9 @@ export default function OptionsCard({ route, itemInfo, updateIntemInfo, checkout
         }
     }
 
-    const onPaymentMethodChange = (e) => {
-        updateIntemInfo(e.target.name, e.target.value);
-    }
+    // const onPaymentMethodChange = (e) => {
+    //     updateIntemInfo(e.target.name, e.target.value);
+    // }
 
     return (
         <div className={`${styles["options-card"]}`}>
@@ -44,7 +48,7 @@ export default function OptionsCard({ route, itemInfo, updateIntemInfo, checkout
                     </Radio.Group>
                 </div>
             </div>
-            <div className={`${styles["info-container"]}`}>
+            {/* <div className={`${styles["info-container"]}`}>
                 <h3 className={styles["heading"]}>Chọn phương thức thanh toán</h3>
                 <div className={styles["payment-method-checkbox"]}>
                     <Radio.Group name="orderType" onChange={onPaymentMethodChange} value={itemInfo?.orderType}>
@@ -57,14 +61,17 @@ export default function OptionsCard({ route, itemInfo, updateIntemInfo, checkout
                                         disabled={!item?.isActive}
                                         checked={item?.default}
                                     >
-                                        {item?.title}
+                                        <div style={{display:"flex",gap:"32px"}}>
+                                            <span>{item?.title}</span>
+                                            {item?.value === 2 && <span>{getCurrencyFormat(sessionData?.user?.wallet)}</span>}
+                                        </div>
                                     </Radio>
                                 })
                             }
                         </Space>
                     </Radio.Group>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

@@ -14,8 +14,8 @@ export function basePost({ endpoint, headers, body }) {
     return axiosClient.post(endpoint, body, { headers })
 }
 
-export function basePatch({ endpoint, headers, body }) {
-    return axiosClient.patch(endpoint, {headers}, body)
+export function basePut({ endpoint, headers, body }) {
+    return axiosClient.put(endpoint, body, {headers})
 }
 
 export function baseDelete({ endpoint, headers }) {

@@ -1,0 +1,29 @@
+@import "_mixins.scss";
+
+.main-container {
+    width: 100%;
+    max-width: 580px;
+
+    padding: 32px 24px;
+
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    .heading {
+        @include text-headline-3;
+    }
+
+    .main-wrapper{
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .input-field{
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+    }
+}

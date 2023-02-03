@@ -8,11 +8,41 @@
     border-radius: 8px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
-    @include sm-down{
+    @include sm-down {
         padding: unset;
         width: 100%;
         background-color: unset;
         box-shadow: none;
+    }
+
+    .user-wallet-info {
+        padding: 8px 16px;
+        display: flex;
+        flex-direction: column;
+        
+        &__title{
+
+        }
+
+        &__amount{
+            margin-top: 4px;
+            font-weight: 600;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .wallet-deposit{
+                color: $color-primary;
+                font-size: 12px;
+                font-weight: 400;
+
+                &:hover{
+                    color: rgb(82, 177, 233);
+                    text-decoration: underline;
+                }
+            }
+        }
     }
 
     .nav-setting {
@@ -31,11 +61,11 @@
         }
     }
 
-    .divider{
+    .divider {
         margin: 8px 16px;
     }
 
-    .sign-out-btn{
+    .sign-out-btn {
         display: block;
         padding: 16px 16px;
 

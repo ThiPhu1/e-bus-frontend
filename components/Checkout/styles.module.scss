@@ -1,4 +1,5 @@
 @import "_mixins.scss";
+@import "_variables.scss";
 
 .chekout-container {
     width: 100%;
@@ -112,6 +113,11 @@
 
         .payment-method-checkbox {
             margin-top: 24px;
+
+            .payment-method-text {
+                display: flex;
+
+            }
         }
 
         .payment-info {
@@ -140,7 +146,47 @@
                 }
             }
         }
+
+        .checkout-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            .checkout-wallet {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+
+                .wallet-info {
+                    display: flex;
+                    justify-content: flex-end;
+                    gap: 4px;
+
+                    &__balance {
+                        margin-bottom: 4px;
+                        font-size: 12px;
+                        color: gray;
+                    }
+
+                    &__deposit {
+                        color: $color-primary;
+                        font-size: 12px;
+                        font-weight: 400;
+        
+                        &:hover{
+                            color: rgb(82, 177, 233);
+                            text-decoration: underline;
+                        }
+                    }
+                }
+
+            }
+
+            .button-icon {
+                margin-right: 8px;
+                transform: translateY(7%);
+            }
+        }
+
     }
-
-
 }

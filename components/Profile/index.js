@@ -1,8 +1,8 @@
 import styles from "./styles.module.scss";
 import { useEffect, useState } from "react";
+import getCurrencyFormat from "utils/getCurrencyFormat";
 
 export default function ProfilePage({ user }) {
-
     const [profileInfo, setProfileInfo] = useState();
 
     useEffect(() => {

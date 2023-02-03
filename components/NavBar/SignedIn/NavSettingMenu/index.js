@@ -6,14 +6,24 @@ import { signOut } from "next-auth/react";
 import { settingMenu } from "utils/constant/navbar/settingMenu";
 import { signedInNavItems } from "utils/constant/navbar/signedIn";
 
-export default function NavSettingMenu({ isMobile, onMenuClose }) {
+import { useSession } from "next-auth/react";
+import getCurrencyFormat from "utils/getCurrencyFormat";
 
+export default function NavSettingMenu({ isMobile, onMenuClose }) {
+    const { data: sessionData } = useSession();
     const onSignOutBtnCLick = () => {
         signOut();
     }
 
     return (
         <div className={styles["nav-setting-wrapper"]}>
+            <div className={styles["user-wallet-info"]}>
+                <span className={styles["user-wallet-info__title"]}>Số dư tài khoản</span>
+                <span className={styles["user-wallet-info__amount"]}>
+                    <span>{getCurrencyFormat(sessionData?.user?.wallet)}</span>
+                    <Link href="/profile/wallet" passHref><a className={styles["wallet-deposit"]}>Nạp thêm</a></Link>
+                </span>
+            </div>
             <ul className={styles["nav-setting"]}>
                 {
                     settingMenu?.map((item, index) =>
@@ -21,7 +31,7 @@ export default function NavSettingMenu({ isMobile, onMenuClose }) {
                             className={styles["nav-setting__item"]}
                             key={index}
                             onClick={isMobile && onMenuClose}
-                            
+
                         >
                             <Link
                                 href={item?.pathName}
