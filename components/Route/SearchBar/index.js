@@ -6,19 +6,45 @@ import {
 import { Form, Input, Button } from "antd";
 
 import routeService from "utils/services/route";
-import {useState} from "react";
+import { useState, useRef } from "react";
+
+const DONE_TYPING_DURATION = 250; //ms
 
 export default function SearchBar({ setRouteList }) {
-    const [isSearching,setIsSearching] = useState(false);
+    const [isSearching, setIsSearching] = useState(false);
+    const isTypingTimeout = useRef();
+    const [inputVal, setInputVal] = useState();
 
-    const onSearchInput = async (e) => {
+    const getRoutes = async () => {
+        const searchVal = inputVal?.trim();
+
         setIsSearching(true);
-        const searchVal = e.target.value?.trim();
         const query = searchVal ? `?route_number=${searchVal}` : null;
-        const res = await routeService.getMany(query)
+        const res = await routeService.getMany(query);
 
-        setRouteList(res?.routes ? res.routes : []);
+        setRouteList(res.routes ? res.routes : []);
         setIsSearching(false);
+    }
+
+    const onSearchInput = (e) => {
+        setInputVal(e.target.value);
+    }
+
+    const setTypingTimeout = () => {
+        isTypingTimeout.current = setTimeout(() => { getRoutes() }, DONE_TYPING_DURATION)
+    }
+
+    const clearTypingTimeout = () => {
+        clearTimeout(isTypingTimeout.current);
+    }
+
+    const keyDownHandle = () => {
+        clearTypingTimeout();
+    }
+
+    const keyUpHandle = () => {
+        clearTypingTimeout();
+        setTypingTimeout();
     }
 
     return (
@@ -29,6 +55,9 @@ export default function SearchBar({ setRouteList }) {
                 size="large"
                 allowClear
                 onChange={onSearchInput}
+                onKeyDown={keyDownHandle}
+                onKeyUp={keyUpHandle}
+                value={inputVal}
             />
         </div>
     );
