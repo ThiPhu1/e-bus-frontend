@@ -25,8 +25,16 @@
             padding: 0 16px;
         }
 
+        @include sm-down{
+            height: $nav-bar-h--sm;
+        }
+
         &__left {
             position: relative;
+
+            .main-logo{
+                display: block;
+            }
         }
 
         &__right {

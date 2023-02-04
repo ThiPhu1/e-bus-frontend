@@ -25,5 +25,10 @@
             flex-direction: column;
             gap: 4px;
         }
+
+        .button-icon {
+            margin-right: 8px;
+            transform: translateY(7%);
+        }
     }
 }

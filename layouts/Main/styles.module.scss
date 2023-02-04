@@ -1,4 +1,12 @@
-.main-wrapper{
-    margin-top: 32px;
+@import './_variables';
+@import './_mixins';
+
+.main-wrapper {
+    padding-top: 32px;
     padding-bottom: 40px;
+    min-height: calc(100vh - $nav-bar-h);
+
+    @include sm-down {
+        min-height: calc(100vh - $nav-bar-h--sm);
+    }
 }

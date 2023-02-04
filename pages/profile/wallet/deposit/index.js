@@ -1,9 +1,9 @@
-import MyWalletPage from "components/Profile/MyWalletPage";
+import WalletDepositPage from "components/Profile/WalletDepositPage";
 import ProfileLayout from "layouts/Profile";
 
 export default function MyWallet() {
     
-    return <MyWalletPage/>;
+    return <WalletDepositPage/>;
 }
 
 MyWallet.getLayout = function getLayout(page) {

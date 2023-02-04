@@ -79,7 +79,7 @@ export default function CheckoutCard({ itemInfo }) {
                 <div className={styles["checkout-wallet"]}>
                     <div className={styles["wallet-info"]}>
                         <span className={styles["wallet-info__balance"]}>{`Số dư hiện tại: ${getCurrencyFormat(userWallet?.balance)}`}</span>
-                        {sessionData?.user?.wallet < itemInfo?.amount && <Link href="/profile/wallet" passHref><a className={styles["wallet-info__deposit"]}>Nạp thêm</a></Link>}
+                        {sessionData?.user?.wallet < itemInfo?.amount && <Link href="/profile/wallet/deposit" passHref><a className={styles["wallet-info__deposit"]}>Nạp thêm</a></Link>}
                     </div>
                     <Button
                         type="primary"

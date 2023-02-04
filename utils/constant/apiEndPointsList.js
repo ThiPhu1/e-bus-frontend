@@ -19,7 +19,8 @@ const apiEndPointList = {
     },
     user: {
         GET_WALLET: "/api/user/wallet/get",
-        DEPOSIT_WALLET: "/api/user/wallet/deposit",
+        CREATE_VNPAY_WALLET_DEPOSIT_ORDER: "/api/user/wallet/deposit/create",
+        VNPAY_WALLET_DEPOSIT_ORDER_RETURN: (queryString) => `/api/user/wallet/deposit/vnpay-return${queryString}`,
     }
 }
 

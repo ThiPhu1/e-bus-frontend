@@ -3,12 +3,21 @@ import styles from "./styles.module.scss";
 import { useState, useEffect } from "react";
 
 import { Form, InputNumber, Button, notification } from "antd";
-import userServices from "utils/services/user";
+import userService from "utils/services/user";
 
 import { useSession } from "next-auth/react";
 import { useAuthContext } from "contexts/auth";
 
-export default function MyWalletPage() {
+import { useRouter } from "next/router";
+import { nanoid } from 'nanoid'
+
+import walletConst from "utils/constant/wallet";
+
+import Image from "next/image";
+
+export default function WalletDepositPage() {
+    const { orderPattern } = walletConst;
+    const router = useRouter();
     const { updateUserWallet } = useAuthContext();
     const [api, contextHolder] = notification.useNotification();
 
@@ -21,19 +30,22 @@ export default function MyWalletPage() {
     }
 
     const handleDeposit = async () => {
+        const orderID = `${orderPattern}${nanoid()}`;
+
         if (!isNaN(value)) {
             const body = {
-                wallet: value,
+                orderId: orderID,
+                bankCode: "",
+                orderDescription: `Deposit wallet`,
+                locale: "vn",
+                amount: value,
             }
             setIsLoading(true);
-            const res = await userServices.wallet.deposit({ body }, sessionData?.accessToken);
+            const res = await userService.wallet.createDepositOrder({ body }, sessionData?.accessToken);
             if (res.status === 200) {
                 if (res?.data?.success) {
-                    api.success({
-                        message: "Success",
-                        description: res.data?.message,
-                    });
-                    updateUserWallet(sessionData?.accessToken);
+                    router.push(res?.data?.url);
+                    // console.log(res.data.url)
                 }
             } else {
                 api.error({
@@ -84,15 +96,17 @@ export default function MyWalletPage() {
                                 max={1000000000}
                             />
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item style={{paddingTop: "8px", marginBottom: 0}}>
                             <Button
                                 type="primary"
                                 htmlType="submit"
                                 block
+                                icon={<span className={styles["button-icon"]}><Image src="/common/icon-vnpay.svg" width={16} height={16} objectFit="contain" /></span>}
                                 loading={isLoading}
                             >
-                                Nạp tiền
+                                Thanh toán VNPay
                             </Button>
+
                         </Form.Item>
                     </Form>
                 </div>

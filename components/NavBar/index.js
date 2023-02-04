@@ -47,7 +47,7 @@ export default function Navbar() {
                         href="/"
                         passHref
                     >
-                        <a >
+                        <a className={styles["main-logo"]}>
                             <Image
                                 src="/common/main_logo.png"
                                 alt="main_logo"

@@ -15,7 +15,7 @@ export default function CheckoutPage({ route }) {
         ticketType: checkout?.ticketTypes[0]?.value,
         amount: route?.route_price,
         paymentService: {
-            bankCode: "NCB",
+            bankCode: "",
             orderDescription: `Thanh toan ve xe ${route.route_name}`,
             locale: "vn",
         }

@@ -47,16 +47,19 @@
 
     .nav-setting {
         &__item {
-            padding: 8px 0;
-
-            a {
-                display: block;
-                padding: 8px 16px;
-
-            }
+            display: block;
+            padding: 16px;
 
             &:hover {
                 background-color: $gray-2;
+            }
+
+            &--active{
+                color: $color-primary;
+
+                &:hover{
+                    background-color: inherit;
+                }
             }
         }
     }

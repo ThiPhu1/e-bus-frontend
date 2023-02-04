@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Button, Avatar } from "antd";
 
 import { signedInNavItems } from "utils/constant/navbar/signedIn";
@@ -7,6 +6,8 @@ import { UserOutlined } from '@ant-design/icons';
 import NavSettingMenu from "./NavSettingMenu";
 
 import styles from "./styles.module.scss";
+
+import NavItem from "./NavSettingMenu/NavItem";
 
 export default function SignedInSecondaryNav({ user, isMobile, onMenuClose }) {
     return (
@@ -17,16 +18,10 @@ export default function SignedInSecondaryNav({ user, isMobile, onMenuClose }) {
                     {
                         signedInNavItems?.map((item, index) => (
                             <li
-                                className={styles["nav-list__item"]}
+                                
                                 key={index}
                             >
-                                <Link
-                                    href={item?.pathName}
-                                >
-                                    <a href={item?.pathName}>
-                                        {item?.title}
-                                    </a>
-                                </Link>
+                                <NavItem item={item} />
                             </li>
                         ))
                     }
