@@ -25,7 +25,10 @@ export default function RouteCard({ route }) {
         <Card>
             <div className={styles["route-card"]}>
                 <div className={styles["route-card__top"]}>
-                    <div className={styles["route-card__top-left"]}>
+                    <span className={styles["route-manage-agency"]}>{route?.route_agencies?.mgtunit_name}</span>
+                </div>
+                <div className={styles["route-card__body"]}>
+                    <div className={styles["route-card__body-left"]}>
                         <div className={styles["route-name"]}>
                             {
                                 route?.route_number
@@ -45,7 +48,7 @@ export default function RouteCard({ route }) {
                                 <span><span>{route?.time_start?.hours}</span>:<span>{route?.time_start?.minutes}</span></span>
                             </span>
                             <span className={styles["route-time-offset"]}>
-                                <span className={styles["arrow"]} spacing={`${route?.route_spacing} phút/chuyến`}/>
+                                <span className={styles["arrow"]} spacing={`${route?.route_spacing} phút/chuyến`} />
                             </span>
                             <span className={`${styles["route-time"]} ${styles["route-time--end"]}`}>
                                 <span><span>{route?.time_end?.hours}</span>:<span>{route?.time_end?.minutes}</span></span>
@@ -53,7 +56,7 @@ export default function RouteCard({ route }) {
                         </div>
                     </div>
                     {/* <div className={styles["route-card-divider"]}></div> */}
-                    <div className={styles["route-card__top-right"]}>
+                    <div className={styles["route-card__body-right"]}>
                         <div className={styles["route-price"]}>
                             <span>Giá vé từ</span>
                             <span className={styles["price"]}>{`${getCurrencyFormat(route?.route_price)}`}</span>

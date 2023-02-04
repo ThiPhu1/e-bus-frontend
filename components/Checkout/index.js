@@ -40,7 +40,7 @@ export default function CheckoutPage({ route }) {
                 />
             </div>
             <div className={styles["chekout-container__right"]}>
-                <InfoCard route={route} />
+                <InfoCard route={route} itemInfo={itemInfo} checkoutConst={checkout}/>
                 <CheckoutCard itemInfo={itemInfo} />
             </div>
         </div>

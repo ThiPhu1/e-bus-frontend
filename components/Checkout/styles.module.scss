@@ -90,9 +90,13 @@
                 &-title {}
 
                 &-value {
+                    text-align: right;
                     font-weight: 600;
+                    flex: 0 1 50%;
 
                     @include sm-down {
+                        text-align: left;
+                        flex: unset;
                         margin-top: 8px;
                     }
                 }

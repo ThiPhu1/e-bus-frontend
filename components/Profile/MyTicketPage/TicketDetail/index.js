@@ -5,7 +5,7 @@ import moment from "moment";
 
 export default function TicketDetail({ data }) {
     const ticketInfo = useMemo(() => {
-        return [
+        return [    
             {
                 title: "Tuyến",
                 value: data?.route?.route_number,
@@ -13,6 +13,10 @@ export default function TicketDetail({ data }) {
             {
                 title: "Tên tuyến",
                 value: data?.route?.route_name,
+            },
+            {
+                title: "Đơn vị vận tải",
+                value: data?.route?.route_agencies?.mgtunit_name,
             },
             {
                 title: "Ngày mua",

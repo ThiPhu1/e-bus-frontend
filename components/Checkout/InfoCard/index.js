@@ -1,23 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles.module.scss";
 
-export default function InfoCard({route}) {
+export default function InfoCard({ route, itemInfo, checkoutConst }) {
 
-    const [routeInfo] = useState([
-        {
-            title: "Tuyến số",
-            value: route?.route_number,
-        },
-        {
-            title: "Tên tuyến",
-            value: route?.route_name,
-        },
-        {
-            title: "Thời gian hoạt động",
-            value: `${route?.time_start?.hours}:${route?.time_start?.minutes} - ${route?.time_end?.hours}:${route?.time_end?.minutes}`,
-        },
-    ]);
+    const [routeInfo, setRouteInfo] = useState([]);
 
+    useEffect(()=>{
+        setRouteInfo([
+            {
+                title: "Tuyến số",
+                value: route?.route_number,
+            },
+            {
+                title: "Tên tuyến",
+                value: route?.route_name,
+            },
+            {
+                title: "Thời gian hoạt động",
+                value: `${route?.time_start?.hours}:${route?.time_start?.minutes} - ${route?.time_end?.hours}:${route?.time_end?.minutes}`,
+            },
+            {
+                title: "Đơn vị vận tải",
+                value: route?.route_agencies?.mgtunit_name,
+            },
+            {
+                title: "Loại vé",
+                value: checkoutConst?.ticketTypes?.find((ck) => ck?.value === itemInfo?.ticketType)?.title
+            },
+        ])
+    },[itemInfo])
 
     return (
         <div className={`${styles["route-info-card"]} ${styles["info-container"]}`}>
