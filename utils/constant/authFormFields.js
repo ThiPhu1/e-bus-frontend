@@ -59,7 +59,7 @@ export const authFormFields = {
     signIn: [
         {
             name: "phoneNumber",
-            label: "Số điện thoại",
+            label: "Tên người dùng hoặc Số điện thoại",
             rules: [
                 { required: true, message: `Vui lòng cung cấp số điện thoại` },
             ],
