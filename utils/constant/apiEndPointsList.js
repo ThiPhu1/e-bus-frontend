@@ -18,7 +18,8 @@ const apiEndPointList = {
         VNPAY_ORDER_RETURN: (queryString) => `/api/order/vnpay-return${queryString}`,
     },
     user: {
-        DEPOSIT_WALLET: "/api/user/deposit/wallet",
+        GET_WALLET: "/api/user/wallet/get",
+        DEPOSIT_WALLET: "/api/user/wallet/deposit",
     }
 }
 

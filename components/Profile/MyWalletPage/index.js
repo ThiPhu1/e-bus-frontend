@@ -1,5 +1,3 @@
-import moment from "moment";
-
 import styles from "./styles.module.scss";
 
 import { useState, useEffect } from "react";
@@ -8,8 +6,10 @@ import { Form, InputNumber, Button, notification } from "antd";
 import userServices from "utils/services/user";
 
 import { useSession } from "next-auth/react";
+import { useAuthContext } from "contexts/auth";
 
 export default function MyWalletPage() {
+    const { updateUserWallet } = useAuthContext();
     const [api, contextHolder] = notification.useNotification();
 
     const { data: sessionData } = useSession();
@@ -26,13 +26,14 @@ export default function MyWalletPage() {
                 wallet: value,
             }
             setIsLoading(true);
-            const res = await userServices.deposit({ body }, sessionData?.accessToken);
+            const res = await userServices.wallet.deposit({ body }, sessionData?.accessToken);
             if (res.status === 200) {
                 if (res?.data?.success) {
                     api.success({
                         message: "Success",
                         description: res.data?.message,
                     });
+                    updateUserWallet(sessionData?.accessToken);
                 }
             } else {
                 api.error({
@@ -61,7 +62,6 @@ export default function MyWalletPage() {
                                 [
                                     () => ({
                                         validator(_, value) {
-                                            console.log("value", typeof value);
                                             if (isNaN(value) || value < 0) {
                                                 return Promise.reject(new Error('Mệnh giá không phù hợp!'));
                                             } else if (value < 10000) {

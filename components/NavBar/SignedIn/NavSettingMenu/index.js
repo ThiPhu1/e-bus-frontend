@@ -8,9 +8,11 @@ import { signedInNavItems } from "utils/constant/navbar/signedIn";
 
 import { useSession } from "next-auth/react";
 import getCurrencyFormat from "utils/getCurrencyFormat";
+import { useAuthContext } from "contexts/auth";
 
 export default function NavSettingMenu({ isMobile, onMenuClose }) {
-    const { data: sessionData } = useSession();
+    const { userWallet } = useAuthContext();
+
     const onSignOutBtnCLick = () => {
         signOut();
     }
@@ -20,7 +22,7 @@ export default function NavSettingMenu({ isMobile, onMenuClose }) {
             <div className={styles["user-wallet-info"]}>
                 <span className={styles["user-wallet-info__title"]}>Số dư tài khoản</span>
                 <span className={styles["user-wallet-info__amount"]}>
-                    <span>{getCurrencyFormat(sessionData?.user?.wallet)}</span>
+                    <span>{getCurrencyFormat(userWallet?.balance)}</span>
                     <Link href="/profile/wallet" passHref><a className={styles["wallet-deposit"]}>Nạp thêm</a></Link>
                 </span>
             </div>

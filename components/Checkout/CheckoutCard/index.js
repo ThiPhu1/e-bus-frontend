@@ -14,7 +14,10 @@ import { WalletOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Image from "next/image";
 
+import { useAuthContext } from "contexts/auth";
+
 export default function CheckoutCard({ itemInfo }) {
+    const { userWallet } = useAuthContext();
     const router = useRouter();
     const { data: sessionData } = useSession();
 
@@ -75,8 +78,8 @@ export default function CheckoutCard({ itemInfo }) {
             <div className={styles["checkout-buttons"]}>
                 <div className={styles["checkout-wallet"]}>
                     <div className={styles["wallet-info"]}>
-                        <span className={styles["wallet-info__balance"]}>{`Số dư hiện tại: ${getCurrencyFormat(sessionData?.user?.wallet)}`}</span>
-                        {sessionData?.user?.wallet < itemInfo?.amount  && <Link href="/profile/wallet" passHref><a className={styles["wallet-info__deposit"]}>Nạp thêm</a></Link>}
+                        <span className={styles["wallet-info__balance"]}>{`Số dư hiện tại: ${getCurrencyFormat(userWallet?.balance)}`}</span>
+                        {sessionData?.user?.wallet < itemInfo?.amount && <Link href="/profile/wallet" passHref><a className={styles["wallet-info__deposit"]}>Nạp thêm</a></Link>}
                     </div>
                     <Button
                         type="primary"

@@ -6,13 +6,26 @@ import { useRouter } from "next/router";
 
 import { transactionConst } from "utils/constant/transaction";
 
+import { useSession } from "next-auth/react";
+import { useAuthContext } from "contexts/auth";
+import { useEffect } from "react";
+
 // const redirectTimeOut = 5;
 export default function TransactionResult({ result }) {
+    const { data: sessionData } = useSession();
+    const { updateUserWallet } = useAuthContext();
     const router = useRouter();
 
     const handleRouting = (pathname) => {
         router.push(pathname);
     }
+
+    useEffect(() => {
+        if(result?.success){
+            updateUserWallet(sessionData?.accessToken)
+        }
+        return;
+    }, [])
 
     // const [redirectTO,setRedirectTO] = useState(redirectTimeOut);
 
@@ -59,7 +72,6 @@ export default function TransactionResult({ result }) {
 
 export async function getServerSideProps(ctx) {
     const { query } = ctx;
-
     const result = transactionConst?.walletStatus?.find((st) => st?.value === query?.code);
 
     return {
