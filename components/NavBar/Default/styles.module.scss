@@ -3,7 +3,7 @@
 
 .nav-wrapper {
     display: flex;
-    gap: 24px;
+    gap: 16px;
     
     @include sm-down {
         flex-direction: column;

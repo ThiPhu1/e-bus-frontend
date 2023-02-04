@@ -94,12 +94,12 @@ export default function CheckoutCard({ itemInfo }) {
                     type="primary"
                     size="large"
                     icon={<span className={styles["button-icon"]}><Image src="/common/icon-vnpay.svg" width={16} height={16} objectFit="contain" /></span>}
-                    ghost
+                    // ghost
                     loading={isLoading?.status && isLoading?.type === 1 ? true : false}
                     disabled={isLoading?.status && isLoading?.type !== 1 ? true : false}
                     onClick={() => handleCheckout({ orderType: 1 })}
                 >
-                    Thanh toán bằng ví điện tử VNPay
+                    Thanh toán VNPay
                 </Button>
             </div>
         </div>

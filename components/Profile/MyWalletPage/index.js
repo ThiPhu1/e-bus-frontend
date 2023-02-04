@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 
 import { useState, useEffect } from "react";
 
-import { InputNumber, Button, notification } from "antd";
+import { Form, InputNumber, Button, notification } from "antd";
 import userServices from "utils/services/user";
 
 import { useSession } from "next-auth/react";
@@ -49,27 +49,52 @@ export default function MyWalletPage() {
             <div className={styles["main-container"]}>
                 <h3 className={styles["heading"]}>Nạp tiền vào tài khoản</h3>
                 <div className={styles["main-wrapper"]}>
-                    <div className={styles["input-field"]}>
-                        <label className={styles["label"]}>Mệnh giá</label>
-                        <InputNumber
-                            style={{ width: "100%" }}
-                            placeholder="10.000"
-                            formatter={(value) => value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                            parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
-                            value={value}
-                            onChange={onInputChange}
-                            min={0}
-                            max={1000000000}
-                        />
-                    </div>
-                    <Button
-                        type="primary"
-                        onClick={handleDeposit}
-                        disabled={isNaN(value) || value == null || value === 0}
-                        loading={isLoading}
+                    <Form
+                        name={"user-wallet-deposit"}
+                        layout="vertical"
+                        onFinish={handleDeposit}
                     >
-                        Nạp tiền
-                    </Button>
+                        <Form.Item
+                            label={"Mệnh giá"}
+                            name={"amount"}
+                            rules={
+                                [
+                                    () => ({
+                                        validator(_, value) {
+                                            console.log("value", typeof value);
+                                            if (isNaN(value) || value < 0) {
+                                                return Promise.reject(new Error('Mệnh giá không phù hợp!'));
+                                            } else if (value < 10000) {
+                                                return Promise.reject(new Error('Mệnh giá tối thiểu 10.000đ'));
+                                            }
+                                            return Promise.resolve();
+                                        }
+                                    })
+                                ]
+                            }
+                        >
+                            <InputNumber
+                                style={{ width: "100%" }}
+                                placeholder="10.000"
+                                formatter={(value) => value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+                                value={value}
+                                onChange={onInputChange}
+                                min={0}
+                                max={1000000000}
+                            />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                block
+                                loading={isLoading}
+                            >
+                                Nạp tiền
+                            </Button>
+                        </Form.Item>
+                    </Form>
                 </div>
             </div>
             {contextHolder}

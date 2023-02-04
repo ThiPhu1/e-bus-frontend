@@ -9,7 +9,7 @@ export default function DefaultSecondaryNav({ isMobile, onMenuClose }) {
             <Link
                 href="/sign-in"
             >
-                <Button type="text" size="large" block={isMobile} onClick={isMobile && onMenuClose}>Đăng nhập</Button>
+                <Button type="primary" ghost size="large" block={isMobile} onClick={isMobile && onMenuClose}>Đăng nhập</Button>
             </Link>
             <Link
                 href="/sign-up"

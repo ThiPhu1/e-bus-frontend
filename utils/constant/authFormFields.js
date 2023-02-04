@@ -42,14 +42,14 @@ export const authFormFields = {
                 [
                     {
                         required: true,
-                        message: 'Please confirm your password!',
+                        message: 'Vui lòng xác nhận mật khẩu!',
                     },
                     ({ getFieldValue }) => ({
                         validator(_, value) {
                             if (!value || getFieldValue('password') === value) {
                                 return Promise.resolve();
                             }
-                            return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                            return Promise.reject(new Error('Mật khẩu không khớp!'));
                         },
                     }),
                 ],
