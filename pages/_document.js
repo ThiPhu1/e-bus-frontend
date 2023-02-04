@@ -5,6 +5,7 @@ export default function Document() {
     return (
         <Html>
             <Head>
+                <title>EBus</title>
                 <meta charSet="utf-8" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link
