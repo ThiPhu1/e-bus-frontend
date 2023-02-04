@@ -1,5 +1,6 @@
 import ProfileSidebar from "./Sidebar";
 import Navbar from "components/NavBar";
+import Footer from "components/Footer";
 
 import styles from "./styles.module.scss";
 
@@ -13,6 +14,7 @@ export default function ProfileLayout({ children }) {
                     {children}
                 </main>
             </div>
+            <Footer />
         </div>
     );
 }

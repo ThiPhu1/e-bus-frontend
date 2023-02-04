@@ -65,6 +65,6 @@ export default function SignUpPage() {
 
 SignUpPage.getLayout = function getLayout(page) {
     return (
-        <MainLayout>{page}</MainLayout>
+        <MainLayout noFooter>{page}</MainLayout>
     );
 }

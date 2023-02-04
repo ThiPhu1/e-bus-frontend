@@ -1,8 +1,8 @@
 import Navbar from "components/NavBar";
-
+import Footer from "components/Footer";
 import styles from "./styles.module.scss";
 
-export default function MainLayout({ children }) {
+export default function MainLayout({ children, noFooter }) {
     return (
         <div className={"container-fluid"}>
             <Navbar />
@@ -11,6 +11,7 @@ export default function MainLayout({ children }) {
                     {children}
                 </main>
             </div>
+            {!noFooter && <Footer/>}
         </div>
     );
 }

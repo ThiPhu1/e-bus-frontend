@@ -68,6 +68,6 @@ export default function SignInPage() {
 
 SignInPage.getLayout = function getLayout(page) {
     return (
-        <MainLayout>{page}</MainLayout>
+        <MainLayout noFooter>{page}</MainLayout>
     );
 }
