@@ -46,7 +46,7 @@ export default function VNPayCallback({ vnpay_result }) {
                         <Button
                             // type="secondary"
                             key="secondary"
-                            onClick={() => handleRouting("/route")}
+                            onClick={() => handleRouting("/")}
                         >
                             Về trang chủ
                         </Button>,

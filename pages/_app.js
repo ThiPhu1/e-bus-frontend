@@ -7,10 +7,12 @@ import { SessionProvider } from "next-auth/react";
 import RefreshTokenHandler from "components/RefreshTokenHandler";
 import { useEffect, useState } from "react";
 
+import NextNProgress from 'nextjs-progressbar';
+
 function Layout({ Component, pageProps }) {
   const getLayout = Component.getLayout || (({ page }) => page);
 
-  const [interval,setInterval] = useState(0);
+  const [interval, setInterval] = useState(0);
 
   // useEffect(()=>{
   //   console.log("interval",interval);
@@ -20,6 +22,7 @@ function Layout({ Component, pageProps }) {
     <SessionProvider session={pageProps.session} refetchInterval={interval}>
       <AuthProvider>
         <AntdStylesConfig>
+          <NextNProgress color="#78BBE0"/>
           {getLayout(<Component {...pageProps} />)}
         </AntdStylesConfig>
       </AuthProvider>
