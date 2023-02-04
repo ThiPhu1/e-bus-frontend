@@ -67,7 +67,7 @@ export default function Navbar() {
                                         placement="right"
                                         open={showMenu}
                                         onClose={onMenuClose}
-                                        width={"50%"}
+                                        width={"70%"}
                                     >
                                         {
                                             !initialCheck
