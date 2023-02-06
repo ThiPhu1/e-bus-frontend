@@ -79,7 +79,7 @@ export default function CheckoutCard({ itemInfo }) {
                 <div className={styles["checkout-wallet"]}>
                     <div className={styles["wallet-info"]}>
                         <span className={styles["wallet-info__balance"]}>{`Số dư hiện tại: ${getCurrencyFormat(userWallet?.balance)}`}</span>
-                        {sessionData?.user?.wallet < itemInfo?.amount && <Link href="/profile/wallet/deposit" passHref><a className={styles["wallet-info__deposit"]}>Nạp thêm</a></Link>}
+                        {userWallet < itemInfo?.amount && <Link href="/profile/wallet/deposit" passHref><a className={styles["wallet-info__deposit"]}>Nạp thêm</a></Link>}
                     </div>
                     <Button
                         type="primary"
@@ -87,7 +87,7 @@ export default function CheckoutCard({ itemInfo }) {
                         icon={<WalletOutlined />}
                         ghost
                         loading={isLoading?.status && isLoading?.type === 2 ? true : false}
-                        disabled={sessionData?.user?.wallet < itemInfo?.amount || isLoading?.status && isLoading?.type !== 2 ? true : false}
+                        disabled={userWallet < itemInfo?.amount || isLoading?.status && isLoading?.type !== 2 ? true : false}
                         onClick={() => handleCheckout({ orderType: 2 })}
                     >
                         Thanh toán bằng số dư ví
