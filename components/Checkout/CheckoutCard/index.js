@@ -22,6 +22,7 @@ export default function CheckoutCard({ itemInfo }) {
     const { data: sessionData } = useSession();
 
     const [isLoading, setLoading] = useState({ status: false });
+
     const handleCheckout = async ({ orderType }) => {
         setLoading({ status: true, type: orderType });
         if (itemInfo) {
@@ -79,7 +80,7 @@ export default function CheckoutCard({ itemInfo }) {
                 <div className={styles["checkout-wallet"]}>
                     <div className={styles["wallet-info"]}>
                         <span className={styles["wallet-info__balance"]}>{`Số dư hiện tại: ${getCurrencyFormat(userWallet?.balance)}`}</span>
-                        {userWallet < itemInfo?.amount && <Link href="/profile/wallet/deposit" passHref><a className={styles["wallet-info__deposit"]}>Nạp thêm</a></Link>}
+                        {userWallet?.balance < itemInfo?.amount && <Link href="/profile/wallet/deposit" passHref><a className={styles["wallet-info__deposit"]}>Nạp thêm</a></Link>}
                     </div>
                     <Button
                         type="primary"
@@ -87,7 +88,7 @@ export default function CheckoutCard({ itemInfo }) {
                         icon={<WalletOutlined />}
                         ghost
                         loading={isLoading?.status && isLoading?.type === 2 ? true : false}
-                        disabled={userWallet < itemInfo?.amount || isLoading?.status && isLoading?.type !== 2 ? true : false}
+                        disabled={userWallet?.balance < itemInfo?.amount || isLoading?.status && isLoading?.type !== 2 ? true : false}
                         onClick={() => handleCheckout({ orderType: 2 })}
                     >
                         Thanh toán bằng số dư ví
