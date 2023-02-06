@@ -1,4 +1,5 @@
 import "../styles/global.scss";
+import Head from "next/head";
 
 import AntdStylesConfig from "components/AntdStylesConfig";
 
@@ -19,15 +20,20 @@ function Layout({ Component, pageProps }) {
   // },[interval])
 
   return (
-    <SessionProvider session={pageProps.session} refetchInterval={interval}>
-      <AuthProvider>
-        <AntdStylesConfig>
-          <NextNProgress color="#78BBE0"/>
-          {getLayout(<Component {...pageProps} />)}
-        </AntdStylesConfig>
-      </AuthProvider>
-      <RefreshTokenHandler setInterval={setInterval} />
-    </SessionProvider>
+    <>
+      <Head>
+        <title>EBus</title>
+      </Head>
+      <SessionProvider session={pageProps.session} refetchInterval={interval}>
+        <AuthProvider>
+          <AntdStylesConfig>
+            <NextNProgress color="#78BBE0" />
+            {getLayout(<Component {...pageProps} />)}
+          </AntdStylesConfig>
+        </AuthProvider>
+        <RefreshTokenHandler setInterval={setInterval} />
+      </SessionProvider>
+    </>
   );
 }
 

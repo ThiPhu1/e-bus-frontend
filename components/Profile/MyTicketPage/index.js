@@ -39,7 +39,7 @@ export default function MyTicketPage() {
             const filteredTickets = ticketListByUserId?.filter((ticket) => {
                 if (ticket?.qr_code) {
                     let ticketType = ticket?.ticket_type;
-                    if (!ticket?.is_valid) {
+                    if (!checkTicketValid(ticket)) {
                         ticketType = 0;
                     }
                     if (ticketType == currentType) {
