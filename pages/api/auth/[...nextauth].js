@@ -45,8 +45,7 @@ export const authOptions = {
                     return data;
                 }
                 else {
-                    // throw new Error(response?.data?.message);
-                    return null;
+                    throw new Error(response?.data?.message);
                 }
             },
         })
