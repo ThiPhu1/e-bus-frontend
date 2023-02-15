@@ -39,9 +39,13 @@ export default function MyTicketPage() {
             const filteredTickets = ticketListByUserId?.filter((ticket) => {
                 if (ticket?.qr_code) {
                     let ticketType = ticket?.ticket_type;
-                    if (!checkTicketValid(ticket)) {
+                    if (!checkTicketValid(ticket) && ticket?.tap_count > 0) {
+                        ticketType = -1;
+                    }
+                    else if (!checkTicketValid(ticket)) {
                         ticketType = 0;
                     }
+
                     if (ticketType == currentType) {
                         return ticket;
                     }
@@ -82,7 +86,8 @@ export default function MyTicketPage() {
                                 {
                                     ticketList?.map((ticket) => (
                                         <li
-                                            className={`${styles["ticket-list__item"]} ${checkTicketValid(ticket) ? "" : styles["is-invalid"]}`}
+                                            // className={`${styles["ticket-list__item"]} ${checkTicketValid(ticket) ? "" : styles["is-invalid"]}`}
+                                            className={`${styles["ticket-list__item"]} ${checkTicketValid(ticket) ? "" : ""}`}
                                             key={ticket?._id}
                                         >
                                             <TicketItem
@@ -116,7 +121,8 @@ export default function MyTicketPage() {
 function TicketItem({ ticket, handleTicketClick, checkTicketValid }) {
 
     return (
-        <div className={`${styles["ticket"]}`} onClick={() => { checkTicketValid(ticket) ? handleTicketClick(ticket) : null }}>
+        // <div className={`${styles["ticket"]}`} onClick={() => { checkTicketValid(ticket) ? handleTicketClick(ticket) : null }}>
+        <div className={`${styles["ticket"]}`} onClick={() => handleTicketClick(ticket)}>
             <div className={styles["ticket__left"]}>
                 <div className={styles["ticket-field-info"]}>
                     <span className={styles["ticket-field-info__label"]}>
