@@ -1,4 +1,4 @@
-import { basePost, baseGet, basePut } from "api/base";
+import { basePost, baseGet, basePut } from "utils/api/base";
 import apiEndPointList from "utils/constant/apiEndPointsList";
 
 const userService = {

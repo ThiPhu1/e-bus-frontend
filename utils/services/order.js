@@ -1,4 +1,4 @@
-import { basePost, baseGet } from "api/base";
+import { basePost, baseGet } from "utils/api/base";
 import apiEndPointList from "utils/constant/apiEndPointsList";
 
 const orderService = {
