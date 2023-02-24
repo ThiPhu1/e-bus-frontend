@@ -27,7 +27,7 @@ export default function RoutePage({ routes }) {
                                         </li>
                                     );
                                 })
-                                : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                                : <Empty description="Không có dữ liệu"/>
                         }
                     </ul>
                 </div>

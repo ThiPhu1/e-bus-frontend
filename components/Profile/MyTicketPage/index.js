@@ -15,6 +15,8 @@ import ticketService from "utils/services/ticket";
 import getEntityByUserId from "utils/getEntityByUserId";
 import { useSession } from "next-auth/react";
 
+import "moment/locale/vi";
+
 export default function MyTicketPage() {
     const { data: sessionData } = useSession();
     const [currentType, setCurrentType] = useState(ticketConst?.type[0].value);
@@ -22,9 +24,13 @@ export default function MyTicketPage() {
     const [selectedTicket, setSelectedTicket] = useState();
     const [isFetching, setIsFetching] = useState(false);
 
-    const checkTicketValid = useCallback((ticket) => {
+    const checkTicketValid = (ticket) => {
         return (ticket?.ticket_expired - Date.now() > 0) && ticket?.is_valid;
-    }, [])
+    }
+
+    const checkTicketIsUsed = (ticket) => {
+        return (ticket?.ticket_expired - Date.now() > 0) && ticket?.is_valid || ticket?.tap_count < 1;
+    }
 
     const handleTicketTypeChange = (value) => {
         setCurrentType(value);
@@ -39,13 +45,12 @@ export default function MyTicketPage() {
             const filteredTickets = ticketListByUserId?.filter((ticket) => {
                 if (ticket?.qr_code) {
                     let ticketType = ticket?.ticket_type;
-                    if (!checkTicketValid(ticket) && ticket?.tap_count > 0) {
+                    if (!checkTicketIsUsed(ticket)) {
                         ticketType = -1;
                     }
                     else if (!checkTicketValid(ticket)) {
                         ticketType = 0;
                     }
-
                     if (ticketType == currentType) {
                         return ticket;
                     }
@@ -102,7 +107,7 @@ export default function MyTicketPage() {
                                 }
                             </ul>
                             : <div className={styles["ticket-list--empty"]}>
-                                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                                <Empty description="Không có dữ liệu"/>
                             </div>
                 }
             </div>
@@ -137,7 +142,7 @@ function TicketItem({ ticket, handleTicketClick, checkTicketValid }) {
                         Hiệu lực
                     </span>
                     <span className={styles["ticket-field-info__value"]}>
-                        {moment(ticket?.ticket_expired).format('h:mm - DD/MM/YYYY')}
+                        {moment(ticket?.ticket_expired).locale("vi").format('H:mm - DD/MM/YYYY')}
                     </span>
                 </div>
             </div>
