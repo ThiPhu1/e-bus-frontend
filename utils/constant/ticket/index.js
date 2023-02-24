@@ -11,6 +11,10 @@ export const ticketConst = {
         {
             label: "Hết hạn",
             value: 0,
+        },
+        {
+            label: "Đã sử dụng",
+            value: -1,
         }
     ],
     status: [
