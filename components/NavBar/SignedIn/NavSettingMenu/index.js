@@ -43,11 +43,10 @@ export default function NavSettingMenu({ isMobile, onMenuClose }) {
                     isMobile &&
                     signedInNavItems?.map((item, index) => (
                         <li
-                            className={styles["nav-setting__item"]}
                             key={index}
                             onClick={isMobile && onMenuClose}
                         >
-
+                            <NavSettingItem item={item} />
                         </li>
                     ))
                 }
@@ -67,14 +66,14 @@ export default function NavSettingMenu({ isMobile, onMenuClose }) {
 const NavSettingItem = ({ item }) => {
     const { pathname } = useRouter();
 
-    const isActive = useMemo(()=> pathname?.includes(item?.pathName),[pathname]);
+    const isActive = useMemo(() => pathname?.includes(item?.pathName), [pathname]);
 
     return (
         <Link
             href={item?.pathName}
         >
             <a
-                className={`${styles["nav-setting__item"]} ${isActive ? styles["nav-setting__item--active"] : "" }`}
+                className={`${styles["nav-setting__item"]} ${isActive ? styles["nav-setting__item--active"] : ""}`}
                 href={item?.pathName}
             >
                 {item?.title}
