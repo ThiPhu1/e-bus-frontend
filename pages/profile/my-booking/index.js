@@ -12,7 +12,6 @@ import getEntityByUserId from "utils/getEntityByUserId";
 import orderService from "utils/services/order";
 
 export default function MyBooking({ orders }) {
-    
     return <MyBookingPage orders={orders}/>;
 }
 
@@ -38,7 +37,7 @@ export async function getServerSideProps(ctx) {
 
     return {
         props: {
-            orders: orderListByUserId,
+            orders: orderListByUserId?.reverse(),
         }
     }
 }
